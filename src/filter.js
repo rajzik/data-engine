@@ -99,7 +99,7 @@ export default class Filter {
      */
     updateFilter = () => {
         if (this.data === null) {
-            throw new Error('Data are null cannot filter!');
+            throw new Error('Data are null and cannot be filtered!');
         }
         this.filtered = this.data.filter(this.filterAll);
         return this.filtered;

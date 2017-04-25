@@ -11,9 +11,9 @@ export default class app extends Component {
         super(props);
 
         this.dataEngine = new DataEngine(props.data);
-        this.txtFilter = new FilterValue('applianceId');
-        this.rgxFilter = new FilterValue('applianceLabel');
-        this.arrFilter = new FilterValue('type');
+        this.txtFilter = new FilterValue('id');
+        this.rgxFilter = new FilterValue('email');
+        this.arrFilter = new FilterValue('first_name');
         this.state = {
             data: this.dataEngine.getData()
         };
@@ -21,11 +21,11 @@ export default class app extends Component {
 
     textFilter = (event) => {
         if (event.target.value.length !== 0) {
-            this.txtFilter.updateValue(event.target.value);
+            this.txtFilter.updateValue(parseInt(event.target.value, 10));
             this.applyFilters(this.txtFilter);
             return true;
         }
-        this.removeFilter('applianceId');
+        this.removeFilter('id');
         return true;
     }
     regexFilter = (event) => {
@@ -35,7 +35,7 @@ export default class app extends Component {
             this.applyFilters(this.rgxFilter);
             return true;
         }
-        this.removeFilter('applianceLabel');
+        this.removeFilter('email');
         return true;
     }
     arrayFilter = (event) => {
@@ -61,15 +61,15 @@ export default class app extends Component {
         const body = this.state.data
                             .map(line => (
                                 <tr key={line.id}>
-                                    <td>{line.applianceId}</td>
-                                    <td>{line.applianceLabel}</td>
-                                    <td>{line.type}</td>
+                                    <td>{line.id}</td>
+                                    <td>{line.email}</td>
+                                    <td>{line.first_name}</td>
                                 </tr>));
         return (
             <table className="table">
                 <thead>
                     <tr>
-                        <th><input type="text" placeholder="Exact value" onChange={this.textFilter} /></th>
+                        <th><input type="number" placeholder="Exact value" onChange={this.textFilter} /></th>
                         <th><input type="text" placeholder="Chunk value" onChange={this.regexFilter} /></th>
                         <th><input type="text" placeholder="Multiple value, by comma" onChange={this.arrayFilter} /></th>
                     </tr>

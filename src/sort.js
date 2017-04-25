@@ -17,14 +17,9 @@ export default class Sort {
     constructor(data, primaryKey = null, sortFunction = null) {
         this.data = data;
         this.sortDefault = () => {};
-        this.primaryKey = primaryKey;
-        if (this.primaryKey) {
-            this.sortDefault = this.comparePrimaryKey;
-        }
+        this.setPrimaryKey(primaryKey);
         this.sortFunc = this.defaultSort;
-        if (sortFunction) {
-            this.sortFunc = sortFunction;
-        }
+        this.setSortFunction(sortFunction);
     }
     /**
      * Update data, refresh old data with new.
@@ -41,6 +36,54 @@ export default class Sort {
         this.currentName = null;
 
         return data;
+    }
+    /**
+     * Setter for custom function
+     *
+     * @param {function} func your custom sort function
+     * @memberOf Sort
+     */
+    setSortFunction = (func) => {
+        if (typeof func === 'function') {
+            this.sortFunc = func;
+            this.isCustomFunction = true;
+        }
+    }
+    /**
+     * Setter for primary key (fallback key)
+     *
+     * @param {string} key primary key
+     * @memberOf Sort
+     */
+    setPrimaryKey = (key) => {
+        if (typeof key === 'string') {
+            this.primaryKey = key;
+            if (!this.isCustomFunction) {
+                this.sortFunc = this.defaultSortWithKey;
+            }
+        }
+    }
+    /**
+     * Remover primary key set to default
+     *
+     *
+     * @memberOf Sort
+     */
+    removePrimaryKey = () => {
+        this.primaryKey = '';
+        if (!this.isCustomFunction) {
+            this.sortFunc = this.defaultSort;
+        }
+    }
+    /**
+     * Setup default sort function
+     *
+     *
+     * @memberOf Sort
+     */
+    setDefaultSort = () => {
+        this.isCustomFunction = false;
+        this.sortFunc = this.primaryKey ? this.defaultSortWithKey : this.defaultSort;
     }
     /**
      * Compare primary key
@@ -61,7 +104,7 @@ export default class Sort {
      */
     compare = (a, b) => a[this.currentName] > b[this.currentName]
     /**
-     * sort by name, sets new name and check if we need to only revese
+     * sort by name, sets new name and check if we need to only reverse
      *
      * @param {string} name key for sort
      * @memberOf Sort
@@ -74,6 +117,21 @@ export default class Sort {
         return this.justSort();
     };
     /**
+     * default sort with key
+     * Default sorting function when user won't add own function.
+     *
+     * @param {any} a - first item
+     * @param {any} b - second item
+     * @return {number} position of elements
+     * @memberOf Sort
+     */
+    defaultSortWithKey = (a, b) => {
+        if (a[this.currentName] === b[this.currentName]) {
+            return this.sortDefault(a, b);
+        }
+        return this.compare(a, b);
+    }
+    /**
      * default sort
      * Default sorting function when user won't add own function.
      *
@@ -82,12 +140,7 @@ export default class Sort {
      * @return {number} position of elements
      * @memberOf Sort
      */
-    defaultSort = (a, b) => {
-        if (a[this.currentName] === b[this.currentName]) {
-            return this.sortDefault(a, b);
-        }
-        return this.compare(a, b);
-    }
+    defaultSort = (a, b) => this.compare(a, b)
     /**
      * Well just sort function. when we need resort.
      *
@@ -106,5 +159,12 @@ export default class Sort {
      * @return {Array} reversed data
      * @memberOf Sort
      */
-    justReverse = () => this.data.reverse()
+    justReverse = () => this.data.reverse();
+    /**
+     * Getter for data
+     *
+     *
+     * @memberOf Sort
+     */
+    getData = () => this.data;
 }

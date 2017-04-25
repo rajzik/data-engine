@@ -41,7 +41,7 @@ module.exports = {
                 return env;
             }, {})
         }),
-        new webpack.NoErrorsPlugin(),
+        new webpack.NoEmitOnErrorsPlugin(),
         new NyanProgressWebpackPlugin()
     ].concat(isProduction ? [
         new CleanWebpackPlugin(['demo/dist', 'lib'])
