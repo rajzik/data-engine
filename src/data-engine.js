@@ -109,6 +109,12 @@ export default class DataEngine {
      * @memberOf DataEngine
      */
     removePrimaryKey = this.sort.removePrimaryKey
+    /**
+     * Setter for primary key
+     *
+     * @param {string} primary key
+     * @memberOf DataEngine
+     */
     setPrimaryKey = this.sort.setPrimaryKey;
     /**
      * Clearing sort
