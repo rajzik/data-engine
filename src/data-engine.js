@@ -2,7 +2,7 @@
 
 import Filter from './filter';
 import Sort from './sort';
-
+import FilterValue from './filter-value';
 /**
  * Data engine providing sort and filter functionality
  *
@@ -134,3 +134,6 @@ export default class DataEngine {
      */
     getData = () => this.data;
 }
+
+
+export { Filter, Sort, FilterValue };
