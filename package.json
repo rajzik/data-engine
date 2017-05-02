@@ -1,6 +1,6 @@
 {
   "name": "data-engine",
-  "version": "0.0.9-1",
+  "version": "0.0.10",
   "description": "Data processing, filter and sort",
   "scripts": {
     "test:node": "jest",
