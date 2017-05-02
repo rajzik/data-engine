@@ -6,8 +6,9 @@
     "test:node": "jest",
     "test": "npm run test:node",
     "build:demo": "cross-env NODE_ENV=production webpack -p --optimize-dedupe",
-    "build": "node scripts/rollup/build.js",
-    "start": "webpack-dev-server"
+    "build": "npm run check-version && node scripts/rollup/build.js",
+    "start": "webpack-dev-server",
+    "check-version": "node ./scripts/prerelease/check-version.js"
   },
   "keywords": [
     "Sort",

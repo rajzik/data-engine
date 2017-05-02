@@ -33,15 +33,15 @@ function getPackageName(name) {
 }
 
 
-function packPackage(packageName) {
-    const packageDirectory = resolve(`./build/packages/${packageName}`);
-    if (fs.existsSync(packageDirectory)) {
-        const read = targz().createReadStream(packageDirectory);
-        const write = fs.createWriteStream(`./build/${packageName}.tar.gz`);
-        read.pipe(write);
-    }
-    return Promise.resolve();
-}
+// function packPackage(packageName) {
+//     const packageDirectory = resolve(`./build/packages/${packageName}`);
+//     if (fs.existsSync(packageDirectory)) {
+//         const read = targz().createReadStream(packageDirectory);
+//         const write = fs.createWriteStream(`./build/${packageName}.tar.gz`);
+//         read.pipe(write);
+//     }
+//     return Promise.resolve();
+// }
 
 
 function copyBundleIntoNodePackage(packageName, filename, bundleType) {
@@ -100,9 +100,6 @@ function createNodePackage(bundleType, packageName, filename) {
     // the only case where we don't want to copy the package is for FB bundles
     return copyNodePackageTemplate(packageName).then(() =>
         copyBundleIntoNodePackage(packageName, filename, bundleType)
-            .then(() =>
-            packPackage(packageName)
-        )
     );
 }
 

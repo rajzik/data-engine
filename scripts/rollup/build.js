@@ -36,7 +36,6 @@ function getFormat(bundleType) {
 function getFilename(name, bundleType) {
   // we do this to replace / to -, for react-dom/server
     const newName = name.replace('/', '-');
-    console.log(newName, bundleType);
     switch (bundleType) {
     case UMD_DEV:
         return `${newName}.development.js`;
@@ -129,7 +128,6 @@ function createBundle(bundle, bundleType) {
         return Promise.resolve();
     }
 
-    console.log(bundle);
     const filename = getFilename(bundle.name, bundleType);
     const logKey = `${filename} - (${bundleType.toLowerCase()})`;
     const format = getFormat(bundleType);
@@ -205,7 +203,7 @@ rimraf('build', () => {
   // and fixes a bunch of IO failures that sometimes occured
     return runWaterfall(tasks)
     .then(() => {
-        console.log('something');
+        console.log('DONE!');
     })
     .catch((err) => {
         console.error(err);
