@@ -1,8 +1,14 @@
 /* eslint-disable */
 'use strict';
 
+var def;
 if (process.env.NODE_ENV === 'production') {
-  module.exports = require('./cjs/data-engine.production.min.js');
+  def = require('./cjs/data-engine.production.min.js')
 } else {
-  module.exports = require('./cjs/data-engine.development.js');
-}
+  def = require('./cjs/data-engine.development.js');
+}  
+
+module.exports['default'] = def.default;
+module.exports.FilterValue = def.FilterValue;
+module.exports.Filter = def.Filter;
+module.exports.Sort = def.Sort;
