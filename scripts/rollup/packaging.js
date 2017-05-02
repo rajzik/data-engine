@@ -2,7 +2,7 @@
 const ncp = require('ncp').ncp;
 const resolve = require('path').resolve;
 const fs = require('fs');
-const archiver = require('archiver')('zip');
+const targz = require('tar.gz');
 
 
 const Bundles = require('./bundles');
@@ -36,6 +36,9 @@ function getPackageName(name) {
 function packPackage(packageName) {
     const packageDirectory = resolve(`./build/packages/${packageName}`);
     if (fs.existsSync(packageDirectory)) {
+        const read = targz().createReadStream(packageDirectory);
+        const write = fs.createWriteStream(`./build/${packageName}.tar.gz`);
+        read.pipe(write);
     }
     return Promise.resolve();
 }
