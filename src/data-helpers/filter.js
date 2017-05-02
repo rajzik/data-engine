@@ -1,4 +1,4 @@
-import FilterValue from './filter-value';
+import FilterValue from 'filter-value';
 
 /**
  * Filter engine

@@ -1,15 +1,18 @@
 
 
-import Filter from './filter';
-import Sort from './sort';
-import FilterValue from './filter-value';
+import Filter from 'filter';
+import Sort from 'sort';
+import FilterValue from 'filter-value';
 /**
  * Data engine providing sort and filter functionality
  *
  * @export
  * @class DataEngine
  */
-export default class DataEngine {
+class DataEngine {
+    static Filter = Filter;
+    static Sort = Sort;
+    static FilterValue = FilterValue;
     /**
      * Creates an instance of DataEngine.
      * @param {Array} [data=null]
@@ -136,4 +139,4 @@ export default class DataEngine {
 }
 
 
-export { Filter, Sort, FilterValue };
+export default DataEngine;
