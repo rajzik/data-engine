@@ -140,3 +140,4 @@ class DataEngine {
 
 
 export default DataEngine;
+export { FilterValue, Filter, Sort };

@@ -27,7 +27,7 @@ const bundles = [
             moduleName: 'DataEngine',
             sourceMap: false,
         },
-        entry: 'src/index.js',
+        entry: 'src/data-engine.js',
         externals: [
             'data-filter',
             'data-sort',
