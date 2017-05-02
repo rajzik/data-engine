@@ -4,8 +4,8 @@ const currentVersion = require('../../package.json').version;
 const versions = {
     'packages/data-engine/package.json': require('../../packages/data-engine/package.json').version,
     'packages/filter-value/package.json': require('../../packages/filter-value/package.json').version,
-    'packages/filter/package.json': require('../../packages/filter/package.json').version,
-    'packages/sort/package.json': require('../../packages/sort/package.json').version,
+    'packages/data-filter/package.json': require('../../packages/data-filter/package.json').version,
+    'packages/data-sort/package.json': require('../../packages/data-sort/package.json').version,
 };
 
 let allVersionsMatch = true;

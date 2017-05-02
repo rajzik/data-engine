@@ -4,6 +4,7 @@ const rollup = require('rollup').rollup;
 const babel = require('rollup-plugin-babel');
 const uglify = require('rollup-plugin-uglify');
 const alias = require('rollup-plugin-alias');
+const commonjs = require('rollup-plugin-commonjs');
 const rimraf = require('rimraf');
 const fs = require('fs');
 const join = require('path').join;
@@ -97,12 +98,13 @@ function getPlugins(entry, babelOpts, paths, filename, bundleType) {
     switch (bundleType) {
     case UMD_DEV:
     case NODE_DEV:
-        plugins.push(replace(stripEnvVariables(false)));
+        plugins.push(replace(stripEnvVariables(false)), commonjs());
         break;
     case UMD_PROD:
     case NODE_PROD:
         plugins.push(
             replace(stripEnvVariables(true)),
+            commonjs(),
             // needs to happen after strip env
             uglify(uglifyConfig()));
         break;
@@ -137,6 +139,7 @@ function createBundle(bundle, bundleType) {
 
     return rollup({
         entry: bundle.entry,
+        external: bundle.externals,
         onwarn: handleRollupWarnings,
         plugins: getPlugins(bundle.entry, bundle.babelOpts, bundle.paths, filename, bundleType),
     })

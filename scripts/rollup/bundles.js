@@ -18,7 +18,7 @@ const babelOptsReact = {
 };
 
 const bundles = [
-  /** ***** Main *******/
+    // Data engine
     {
         babelOpts: babelOptsReact,
         bundleTypes: [UMD_DEV, UMD_PROD, NODE_DEV, NODE_PROD],
@@ -28,39 +28,46 @@ const bundles = [
             sourceMap: false,
         },
         entry: 'src/index.js',
-        hasteName: 'DataEngine',
-        paths: [
-            'src/data-helpers/**/*.js',
-            'src/data-engine.js'
+        externals: [
+            'data-filter',
+            'data-sort',
+            'filter-value'
         ],
         name: 'data-engine',
-    },
-    {
-        babelOpts: babelOptsReact,
-        bundleTypes: [UMD_DEV, UMD_PROD, NODE_DEV, NODE_PROD],
-        config: {
-            destDir: 'build/',
-            moduleName: 'Filter',
-            sourceMap: false,
-        },
-        entry: 'src/data-helpers/filter.js',
-        name: 'filter',
         paths: [
-            'src/data-helpers/filter-helpers/**/*.js'
+            'src/data-engine.js'
         ],
     },
+    // Data filter
     {
         babelOpts: babelOptsReact,
         bundleTypes: [UMD_DEV, UMD_PROD, NODE_DEV, NODE_PROD],
         config: {
             destDir: 'build/',
-            moduleName: 'Sort',
+            moduleName: 'DataFilter',
             sourceMap: false,
         },
-        entry: 'src/data-helpers/sort.js',
+        externals: [
+            'filter-value'
+        ],
+        entry: 'src/data-helpers/data-filter.js',
+        name: 'data-filter',
         paths: [],
-        name: 'sort',
     },
+    // Data sort
+    {
+        babelOpts: babelOptsReact,
+        bundleTypes: [UMD_DEV, UMD_PROD, NODE_DEV, NODE_PROD],
+        config: {
+            destDir: 'build/',
+            moduleName: 'DataSort',
+            sourceMap: false,
+        },
+        entry: 'src/data-helpers/data-sort.js',
+        paths: [],
+        name: 'data-sort',
+    },
+    // Filter value
     {
         babelOpts: babelOptsReact,
         bundleTypes: [UMD_DEV, UMD_PROD, NODE_DEV, NODE_PROD],

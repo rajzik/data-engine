@@ -1,7 +1,7 @@
 
 
-import Filter from 'filter';
-import Sort from 'sort';
+import Filter from 'data-filter';
+import Sort from 'data-sort';
 import FilterValue from 'filter-value';
 /**
  * Data engine providing sort and filter functionality
