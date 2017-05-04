@@ -98,27 +98,27 @@ class DataEngine {
      * @param {function} new sorting function
      * @memberOf DataEngine
      */
-    setSortFunction = this.sort.setSortFunction;
+    setSortFunction = func => this.sort.setSortFunction(func);
     /**
      * Setting default sort function
      *
      *
      * @memberOf DataEngine
      */
-    setDefaultSort = this.sort.setDefaultSort;
+    setDefaultSort = () => this.sort.setDefaultSort();
     /**
      * Setup default sort function
      *
      * @memberOf DataEngine
      */
-    removePrimaryKey = this.sort.removePrimaryKey
+    removePrimaryKey = () => this.sort.removePrimaryKey();
     /**
      * Setter for primary key
      *
      * @param {string} primary key
      * @memberOf DataEngine
      */
-    setPrimaryKey = this.sort.setPrimaryKey;
+    setPrimaryKey = primaryKey => this.sort.setPrimaryKey(primaryKey);
     /**
      * Clearing sort
      *
