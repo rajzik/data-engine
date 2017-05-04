@@ -1,9 +1,21 @@
 {
   "presets": [
-      ["es2015",  
-        {
-          "modules": false
-        }
-      ], "stage-0"],
-      "plugins": ["external-helpers"]
+    [
+      "es2015",
+      {
+        "modules": false
+      }
+    ],
+    "stage-0"
+  ],
+  "plugins": [
+    "external-helpers"
+  ],
+  "env": {
+    "test": {
+      "plugins": [
+        "transform-es2015-modules-commonjs"
+      ]
+    }
+  }
 }

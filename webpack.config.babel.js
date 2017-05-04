@@ -5,7 +5,7 @@ import CleanWebpackPlugin from 'clean-webpack-plugin';
 import NyanProgressWebpackPlugin from 'nyan-progress-webpack-plugin';
 
 const config = {
-    port: 3000
+    port: 3000,
 };
 
 
@@ -21,13 +21,13 @@ module.exports = {
     entry: entries,
     output: {
         path: path.resolve(__dirname, 'demo/dist'),
-        filename: 'js/bundle.js'
+        filename: 'js/bundle.js',
     },
     plugins: [
         new HtmlWebpackPlugin({
             inject: true,
             template: 'demo/index.html',
-            env: process.env
+            env: process.env,
         }),
         new webpack.DefinePlugin({
             'process.env': [
@@ -39,7 +39,7 @@ module.exports = {
             ].reduce((env, key) => {
                 env[key] = JSON.stringify(process.env[key]);
                 return env;
-            }, {})
+            }, {}),
         }),
         new webpack.NoEmitOnErrorsPlugin(),
         new NyanProgressWebpackPlugin()
@@ -53,7 +53,7 @@ module.exports = {
         modules: [
             'node_modules',
             'src'
-        ]
+        ],
     },
     module: {
         rules: [{
@@ -64,8 +64,8 @@ module.exports = {
             ],
             use: [
                 'babel-loader'
-            ]
-        }]
+            ],
+        }],
     },
     devServer: isProduction ? null : {
         contentBase: 'demo',
@@ -74,20 +74,12 @@ module.exports = {
         hot: true,
         stats: {
             chunkModules: false,
-            colors: true
+            colors: true,
         },
-        historyApiFallback: true
+        historyApiFallback: true,
     },
     node: {
-        fs: 'empty'
-    }
+        fs: 'empty',
+    },
 };
 
-// {
-//             test: /\.jsx?$/,
-//             loaders: ['babel'],
-            // include: [
-            //     path.join(__dirname, 'src'),
-            //     path.join(__dirname, 'demo/src')
-            // ]
-//         }

@@ -1,3 +1,7 @@
+/**
+ * @providesModule Filter
+ */
+
 import FilterValue from 'filter-value';
 
 /**
@@ -50,7 +54,7 @@ export default class Filter {
             }
             // Exception when item doesn't have name!
             if (typeof item.getName !== 'string') {
-                throw new TypeError(`${item.getName()} has to be string`);
+                throw new TypeError(`${item.getName} has to be string`);
             }
             // Setting new element
             this.filter[item.getName] = item;

@@ -1,6 +1,6 @@
 
-import Filter from '../src/filter';
-import FilterValue from '../src/filter-value';
+import Filter from '../src/data-helpers/filter';
+import FilterValue from '../src/data-helpers/filter-helpers/filter-value';
 import { originalData, data1 } from './data';
 // TODO: Add more test
 

@@ -1,3 +1,7 @@
+/**
+ * @providesModule FilterValue
+ */
+
 import './update-prototype';
 import regexEscape from './regex-escape';
 
@@ -103,8 +107,7 @@ export default class FilterValue {
         if (this.type) {
             this.item = this.prepareItem(item);
             this.compareFunc = this.TYPES[this.type];
-        }
-        else {
+        }        else {
             throw new TypeError('item isn\'t valid filter value, possible types are string, RegExp, number, function, array of types mentioned before.');
         }
     }
@@ -176,7 +179,7 @@ export default class FilterValue {
         array: this.arrayCompare,
         regexp: this.regexpCompare,
         func: this.funcCompare,
-        range: this.rangeCompare
+        range: this.rangeCompare,
     };
     /**
      * Try to retype to number
@@ -220,7 +223,7 @@ export default class FilterValue {
         number: this.numberRetype,
         string: this.stringRetype,
         regexp: this.regexpRetype,
-        boolean: this.booleanRetype
+        boolean: this.booleanRetype,
     }
     /**
      * Applying filter to item which will return true/false. True when it should be ignored.
@@ -251,11 +254,9 @@ export default class FilterValue {
             case 'object':
                 if (Array.isArray(item)) {
                     type = 'array';
-                }
-                else if (item instanceof RegExp) {
+                }                else if (item instanceof RegExp) {
                     type = 'regexp';
-                }
-                else if (item.from && item.to) {
+                }                else if (item.from && item.to) {
                     if (this.checkRangeAbleTypes(item.from) === this.checkRangeAbleTypes(item.to)) {
                         type = 'range';
                     }
