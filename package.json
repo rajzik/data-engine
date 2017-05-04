@@ -1,6 +1,6 @@
 {
   "name": "data-engine",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "Data processing, filter and sort",
   "scripts": {
     "test:node": "jest",
@@ -71,7 +71,14 @@
     "transform": {
       ".js": "<rootDir>/node_modules/babel-jest"
     },
-    "testFileExtensions": ["es6", "js"],
-    "moduleFileExtensions": ["js", "json", "es6"]
+    "testFileExtensions": [
+      "es6",
+      "js"
+    ],
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "es6"
+    ]
   }
 }
