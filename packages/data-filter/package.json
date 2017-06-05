@@ -1,9 +1,33 @@
 {
   "name": "data-filter",
   "description": "Data engine is small data management lib for some sort and filter.",
-  "version": "0.1.7",
+  "version": "1.0.0",
   "keywords": [
-    "Filter"
+    "Data",
+    "Sort",
+    "Filter",
+    "json",
+    "array",
+    "data",
+    "sort",
+    "filter",
+    "filtering",
+    "sorting",
+    "search",
+    "pure",
+    "lightweight",
+    "find",
+    "client",
+    "browser",
+    "functional",
+    "collection",
+    "sorting",
+    "table",
+    "natural",
+    "alphanumeric",
+    "regex",
+    "react",
+    "react-friendly"
   ],
   "license": "MIT",
   "files": [
@@ -22,7 +46,7 @@
   },
   "dependencies": {
     "loose-envify": "^1.1.0",
-    "filter-value": "^0.1.7"
+    "filter-value": "^1.0.0"
   },
   "browserify": {
     "transform": [
