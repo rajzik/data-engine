@@ -10,6 +10,13 @@ const staticTypes = ['number', 'string', 'regexp', 'boolean'];
 // TODO: check static types
 
 export default class FilterValue {
+    static fromJSON(obj) {
+        if (typeof obj == "string") { 
+            const { name, item, type, } = JSON.parse(obj);
+            return new FilterValue(name, item, type);
+        }
+        return null;
+    }
     /**
      * Preparing item for right validation.
      *
@@ -295,3 +302,13 @@ export default class FilterValue {
         return type;
     }
 }
+
+FilterValue.prototype.toJSON() {
+    return {
+        name: this.name,
+        type: this.type,
+        item: this.item,
+    };
+}
+
+
