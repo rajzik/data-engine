@@ -1,37 +1,19 @@
+/* eslint import/no-dynamic-require: "off", global-require: "off" */
 
-const resolve = require('path').resolve;
-const basename = require('path').basename;
-const sync = require('glob').sync;
+const path = require('path');
 
 
-const exclude = [
-    'src/**/__benchmarks__/**/*.js',
-    'src/**/__tests__/**/*.js',
-    'src/**/__mocks__/**/*.js',
-];
-
-function createModuleMap(paths) {
-    const moduleMap = {};
-
-    paths.forEach((path) => {
-        const files = sync(path, { ignore: exclude });
-
-        files.forEach((file) => {
-            const moduleName = basename(file, '.js');
-
-            moduleMap[moduleName] = resolve(file);
-        });
-    });
-
-    return moduleMap;
-}
-
-function getAliases(paths) {
-    return Object.assign(
-    createModuleMap(paths));
+// Determines node_modules packages that are safe to assume will exist.
+function getDependencies(bundleType, entry) {
+    const packageJson = require(`${path.basename(path.dirname(require.resolve(entry)))}/package.json`);
+    // Both deps and peerDeps are assumed as accessible.
+    return Array.from(new Set([
+        ...Object.keys(packageJson.dependencies || {}),
+        ...Object.keys(packageJson.peerDependencies || {})
+    ]));
 }
 
 
 module.exports = {
-    getAliases,
+    getDependencies,
 };

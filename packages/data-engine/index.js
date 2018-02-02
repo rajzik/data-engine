@@ -1,9 +1,5 @@
-/* eslint-disable */
-'use strict';
 
-var def;
-if (process.env.NODE_ENV === 'production') {
-  module.exports = require('./cjs/data-engine.production.min.js')
-} else {
-  module.exports = require('./cjs/data-engine.development.js');
-}  
+
+const DataEngine = require('./src/data-engine');
+
+module.exports = DataEngine.default ? DataEngine.default : DataEngine;

@@ -1,8 +1,5 @@
-/* eslint-disable */
-'use strict';
 
-if (process.env.NODE_ENV === 'production') {
-    module.exports = require('./cjs/filter-value.production.min.js');
-} else {
-    module.exports = require('./cjs/filter-value.development.js');
-}
+
+const FilterValue = require('./src/filter-value');
+
+module.exports = FilterValue.default ? FilterValue.default : FilterValue;

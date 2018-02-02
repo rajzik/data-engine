@@ -1,4 +1,5 @@
 
+
 const bundleTypes = {
     UMD_DEV: 'UMD_DEV',
     UMD_PROD: 'UMD_PROD',
@@ -6,84 +7,67 @@ const bundleTypes = {
     NODE_PROD: 'NODE_PROD',
 };
 
+const {
+    UMD_DEV, UMD_PROD, NODE_DEV, NODE_PROD,
+} = bundleTypes;
 
-const UMD_DEV = bundleTypes.UMD_DEV;
-const UMD_PROD = bundleTypes.UMD_PROD;
-const NODE_DEV = bundleTypes.NODE_DEV;
-const NODE_PROD = bundleTypes.NODE_PROD;
-
-
-const babelOptsReact = {
-    exclude: 'node_modules/**',
-};
 
 const bundles = [
-    // Data engine
+    /** ****** Main Engine ******* */
     {
-        babelOpts: babelOptsReact,
+        label: 'data-engine',
         bundleTypes: [UMD_DEV, UMD_PROD, NODE_DEV, NODE_PROD],
-        config: {
-            destDir: 'build/',
-            moduleName: 'DataEngine',
-            sourceMap: false,
-        },
-        entry: 'src/data-engine.js',
-        externals: [
-            'data-filter',
-            'data-sort',
-            'filter-value'
-        ],
-        name: 'data-engine',
-        paths: [
-            'src/data-engine.js'
-        ],
+        moduleType: 'ISOMORPHIC',
+        entry: 'data-engine',
+        global: 'DataEngine',
+        externals: [],
     },
-    // Data filter
+    /** ******* Filter component ******* */
     {
-        babelOpts: babelOptsReact,
+        label: 'data-filter',
         bundleTypes: [UMD_DEV, UMD_PROD, NODE_DEV, NODE_PROD],
-        config: {
-            destDir: 'build/',
-            moduleName: 'DataFilter',
-            sourceMap: false,
-        },
-        externals: [
-            'filter-value'
-        ],
-        entry: 'src/data-helpers/data-filter.js',
-        name: 'data-filter',
-        paths: [],
+        moduleType: 'ISOMORPHIC',
+        entry: 'data-filter',
+        global: 'Filter',
+        externals: [],
     },
-    // Data sort
+    /** ******* Sort component ******* */
     {
-        babelOpts: babelOptsReact,
+        label: 'data-sort',
         bundleTypes: [UMD_DEV, UMD_PROD, NODE_DEV, NODE_PROD],
-        config: {
-            destDir: 'build/',
-            moduleName: 'DataSort',
-            sourceMap: false,
-        },
-        entry: 'src/data-helpers/data-sort.js',
-        paths: [],
-        name: 'data-sort',
+        moduleType: 'ISOMORPHIC',
+        entry: 'data-sort',
+        global: 'Sort',
+        externals: [],
     },
-    // Filter value
+    /** ******* Sort component ******* */
     {
-        babelOpts: babelOptsReact,
+        label: 'filter-value',
         bundleTypes: [UMD_DEV, UMD_PROD, NODE_DEV, NODE_PROD],
-        config: {
-            destDir: 'build/',
-            moduleName: 'FilterValue',
-            sourceMap: false,
-        },
-        entry: 'src/data-helpers/filter-helpers/filter-value.js',
-        paths: [
-            'src/data-helpers/filter-helpers/*.js'
-        ],
-        name: 'filter-value',
+        moduleType: 'ISOMORPHIC',
+        entry: 'filter-value',
+        global: 'FilterValue',
+        externals: [],
     }
 ];
 
+// Based on deep-freeze by substack (public domain)
+function deepFreeze(o) {
+    Object.freeze(o);
+    Object.getOwnPropertyNames(o).forEach((prop) => {
+        if (
+            o[prop] !== null &&
+            (typeof o[prop] === 'object' || typeof o[prop] === 'function') &&
+            !Object.isFrozen(o[prop])
+        ) {
+            deepFreeze(o[prop]);
+        }
+    });
+    return o;
+}
+
+// Don't accidentally mutate config as part of the build
+deepFreeze(bundles);
 
 module.exports = {
     bundleTypes,

@@ -1,0 +1,8 @@
+{
+    "rules": {
+        "elsint global-require": "off",
+        "no-await-in-loop": "off",
+        "no-return-await": "off",
+        "global-require": "off"
+    }
+}
