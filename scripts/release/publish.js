@@ -5,10 +5,7 @@ const chalk = require('chalk');
 const logUpdate = require('log-update');
 const { getPublicPackages, } = require('./utils');
 
-const checkBuildStatus = require('./publish-commands/check-build-status');
-const commitChangelog = require('./publish-commands/commit-changelog');
 const parsePublishParams = require('./publish-commands/parse-publish-params');
-const printPostPublishSummary = require('./publish-commands/print-post-publish-summary');
 const pushGitRemote = require('./publish-commands/push-git-remote');
 const publishToNpm = require('./publish-commands/publish-to-npm');
 
@@ -18,11 +15,8 @@ const run = async () => {
     params.packages = getPublicPackages();
 
     try {
-        await checkBuildStatus(params);
-        await commitChangelog(params);
         await pushGitRemote(params);
         await publishToNpm(params);
-        await printPostPublishSummary(params);
     } catch (error) {
         logUpdate.clear();
 

@@ -15,7 +15,7 @@ module.exports = () => {
             {
                 content: chalk
                     .hex('#61dafb')
-                    .bold(figlet.textSync('react', { font: 'Graffiti', })),
+                    .bold(figlet.textSync('DATA-ENGINE', { font: 'Graffiti', })),
                 raw: true,
             },
             {
