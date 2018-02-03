@@ -71,6 +71,7 @@
     "minimist": "^1.2.0",
     "mkdirp": "^0.5.1",
     "ncp": "^2.0.0",
+    "object-assign": "^4.1.1",
     "request-promise-json": "^1.0.4",
     "rimraf": "^2.6.2",
     "rollup": "^0.55.3",
