@@ -1,6 +1,6 @@
 
 
-const dependencies = ['object-assign'];
+const dependencies = [];
 
 const paramDefinitions = [
     {
