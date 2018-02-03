@@ -34,7 +34,6 @@ const run = async () => {
         await updatePackageVersions(params);
         await buildArtifacts(params);
         await addGitTag(params);
-        await printPostBuildSummary(params);
     } catch (error) {
         logUpdate.clear();
 
