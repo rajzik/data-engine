@@ -15,7 +15,6 @@ const run = async () => {
     const checkUncommittedChanges = require('./build-commands/check-uncommitted-changes');
     const installYarnDependencies = require('./build-commands/install-yarn-dependencies');
     const parseBuildParameters = require('./build-commands/parse-build-parameters');
-    const printPostBuildSummary = require('./build-commands/print-post-build-summary');
     const updateGit = require('./build-commands/update-git');
     const updatePackageVersions = require('./build-commands/update-package-versions');
     const updateYarnDependencies = require('./build-commands/update-yarn-dependencies');

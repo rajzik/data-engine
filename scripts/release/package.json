@@ -3,5 +3,15 @@
     "version": "0.0.0",
     "private": true,
     "scripts": {},
-    "license": "MIT"
+    "license": "MIT",
+    "dependencies": {
+        "chalk": "^2.3.0",
+        "child-process-promise": "^2.2.1",
+        "command-line-args": "^5.0.1",
+        "command-line-usage": "^4.1.0",
+        "figlet": "^1.2.0",
+        "fs-extra": "^5.0.0",
+        "log-update": "^2.3.0",
+        "semver": "^5.5.0"
+    }
 }
