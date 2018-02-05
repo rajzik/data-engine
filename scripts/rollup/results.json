@@ -12,28 +12,28 @@
       "bundleType": "UMD_PROD",
       "packageName": "data-engine",
       "size": 11057,
-      "gzip": 3165
+      "gzip": 3166
     },
     {
       "filename": "data-engine.development.js",
       "bundleType": "NODE_DEV",
       "packageName": "data-engine",
       "size": 23406,
-      "gzip": 4811
+      "gzip": 4812
     },
     {
       "filename": "data-engine.production.min.js",
       "bundleType": "NODE_PROD",
       "packageName": "data-engine",
       "size": 10650,
-      "gzip": 3124
+      "gzip": 3125
     },
     {
       "filename": "data-filter.development.js",
       "bundleType": "UMD_DEV",
       "packageName": "data-filter",
       "size": 17652,
-      "gzip": 3884
+      "gzip": 3885
     },
     {
       "filename": "data-filter.production.min.js",
@@ -47,7 +47,7 @@
       "bundleType": "NODE_DEV",
       "packageName": "data-filter",
       "size": 17491,
-      "gzip": 3853
+      "gzip": 3854
     },
     {
       "filename": "data-filter.production.min.js",
@@ -61,7 +61,7 @@
       "bundleType": "UMD_DEV",
       "packageName": "data-sort",
       "size": 3850,
-      "gzip": 1179
+      "gzip": 1180
     },
     {
       "filename": "data-sort.production.min.js",
@@ -75,7 +75,7 @@
       "bundleType": "NODE_DEV",
       "packageName": "data-sort",
       "size": 3691,
-      "gzip": 1143
+      "gzip": 1144
     },
     {
       "filename": "data-sort.production.min.js",
@@ -89,21 +89,21 @@
       "bundleType": "UMD_DEV",
       "packageName": "filter-value",
       "size": 13346,
-      "gzip": 3052
+      "gzip": 3053
     },
     {
       "filename": "filter-value.production.min.js",
       "bundleType": "UMD_PROD",
       "packageName": "filter-value",
       "size": 4480,
-      "gzip": 1633
+      "gzip": 1634
     },
     {
       "filename": "filter-value.development.js",
       "bundleType": "NODE_DEV",
       "packageName": "filter-value",
       "size": 13180,
-      "gzip": 3016
+      "gzip": 3017
     },
     {
       "filename": "filter-value.production.min.js",
