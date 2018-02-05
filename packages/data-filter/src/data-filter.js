@@ -44,28 +44,20 @@ export default class Filter {
     update = (...items) => {
         let returnFunc = this.getFilteredData;
         items.forEach((item) => {
-            // Exception when item isn't object!
-            if (typeof item !== 'object') {
-                throw new TypeError(`${item} isn't object!`);
-            }
-            // Exception when item isn't FilterValue!
-            if (!(item instanceof FilterValue)) {
+            // Exception when item isn't filterValue!
+            if (!((typeof item === 'object') && (item instanceof FilterValue))) {
                 throw new TypeError(`${item} has to have filterValue instance`);
             }
-            // Exception when item doesn't have name!
-            if (typeof item.getName !== 'string') {
-                throw new TypeError(`${item.getName} has to be string`);
-            }
-            // Setting new element
-            this.filters[item.getName] = item;
+
+            this.filters[item.Name] = item;
             returnFunc = this.updateFilter;
         });
         return returnFunc();
     }
 
     /**
-     * Remove one or many filter value
-     *
+     * Remove one or as many filters as you add value
+     * only updating when at least one filter was removed
      * @param {object} item - filter item
      *
      * @return {Array} new filtered array
@@ -73,8 +65,8 @@ export default class Filter {
      */
     removeFilter = (...names) => {
         let returnFunc = this.getFilteredData;
-        names.forEach((name) => {
-            const removalName = typeof name === 'string' ? name : name.getName;
+        names.forEach((item) => {
+            const removalName = typeof item === 'string' ? item : item.Name;
             if (this.filters[removalName]) {
                 delete this.filters[removalName];
                 returnFunc = this.updateFilter;

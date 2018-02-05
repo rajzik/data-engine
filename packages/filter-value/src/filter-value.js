@@ -45,7 +45,7 @@ export default class FilterValue {
             if (Array.isArray(item[item.length - 1])) {
                 throw new TypeError('Array in Array isn\'t supported!');
             }
-            return item.map(i => new FilterValue(item.getName, i));
+            return item.map(value => new FilterValue(item.Name, value));
         default:
             if (this.staticType) {
                 return this.RETYPE[this.staticType](item);
@@ -71,7 +71,7 @@ export default class FilterValue {
      * @return {string} name
      * @memberOf FilterValue
      */
-    get getName() {
+    get Name() {
         return this.name;
     }
     /**
