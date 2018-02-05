@@ -19,7 +19,7 @@ export default class Filter {
     constructor(data = null) {
         this.data = data;
         this.filtered = data;
-        this.filter = {};
+        this.filters = {};
     }
     /**
      * Setter for data
@@ -57,7 +57,7 @@ export default class Filter {
                 throw new TypeError(`${item.getName} has to be string`);
             }
             // Setting new element
-            this.filter[item.getName] = item;
+            this.filters[item.getName] = item;
             returnFunc = this.updateFilter;
         });
         return returnFunc();
@@ -75,8 +75,8 @@ export default class Filter {
         let returnFunc = this.getFilteredData;
         names.forEach((name) => {
             const removalName = typeof name === 'string' ? name : name.getName;
-            if (this.filter[removalName]) {
-                delete this.filter[removalName];
+            if (this.filters[removalName]) {
+                delete this.filters[removalName];
                 returnFunc = this.updateFilter;
             }
         });
@@ -89,8 +89,8 @@ export default class Filter {
      * @memberOf Filter
      */
     clearFilters = () => {
-        Object.keys(this.filter).forEach((key) => {
-            delete this.filter[key];
+        Object.keys(this.filters).forEach((key) => {
+            delete this.filters[key];
         });
         this.filtered = this.data;
         return this.filtered;
@@ -116,8 +116,8 @@ export default class Filter {
      * @return {bool}
      * @memberOf Filter
      */
-    filterAll = line => Object.keys(this.filter)
-        .every(key => this.filter[key].compare(line[key]));
+    filterAll = line => Object.keys(this.filters)
+        .every(key => this.filters[key].compare(line[key]));
     /**
      * Simple getter
      *
@@ -125,6 +125,16 @@ export default class Filter {
      *
      * @memberOf Filter
      */
-    getFilteredData = () => this.filtered
+    getFilteredData = () => this.filtered;
+    /**
+     * Getter for filter
+     * @returns {any} anything you pass to filterValue
+     */
+    getFilter(name) {
+        if (this.filters[name]) {
+            return this.filters[name];
+        }
+        return null;
+    }
 }
 
