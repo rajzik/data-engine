@@ -37,7 +37,7 @@ class DataEngine {
      * @memberOf DataEngine
      */
     setData = (data) => {
-        this.data = this.sortEngine.updateData(this.filterEngine.setData(data));
+        this.data = this.sortEngine.setData(this.filterEngine.setData(data));
         return this.data;
     }
     /**
@@ -48,7 +48,7 @@ class DataEngine {
      * @memberOf DataEngine
      */
     updateFilter = (items) => {
-        this.data = this.sortEngine.updateData(this.filterEngine.update(items), true);
+        this.data = this.sortEngine.setData(this.filterEngine.update(items), true);
         return this.data;
     }
     /**
@@ -70,7 +70,7 @@ class DataEngine {
      * @memberOf DataEngine
      */
     removeFilter = (names) => {
-        this.data = this.sortEngine.updateData(this.filterEngine.removeFilter(names), true);
+        this.data = this.sortEngine.setData(this.filterEngine.removeFilter(names), true);
         return this.data;
     }
     /**
@@ -81,7 +81,7 @@ class DataEngine {
      * @memberOf DataEngine
      */
     clearFilters = () => {
-        this.data = this.sortEngine.updateData(this.filterEngine.clearFilters(), true);
+        this.data = this.sortEngine.setData(this.filterEngine.clearFilters(), true);
         return this.data;
     }
     /**

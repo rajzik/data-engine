@@ -33,7 +33,7 @@ export default class Sort {
      * @param {boolean} shouldSort should be resorted
      * @memberOf Sort
      */
-    updateData = (data, shouldSort = false) => {
+    setData = (data, shouldSort = false) => {
         this.data = data;
         if (shouldSort) {
             return this.sortData();
