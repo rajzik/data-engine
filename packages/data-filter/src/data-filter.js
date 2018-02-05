@@ -20,6 +20,7 @@ export default class Filter {
         this.data = data;
         this.filtered = data;
         this.filters = {};
+        this.serverFilters = {};
     }
     /**
      * Setter for data
@@ -54,7 +55,6 @@ export default class Filter {
         });
         return returnFunc();
     }
-
     /**
      * Remove one or as many filters as you add value
      * only updating when at least one filter was removed
@@ -81,11 +81,9 @@ export default class Filter {
      * @memberOf Filter
      */
     clearFilters = () => {
-        Object.keys(this.filters).forEach((key) => {
-            delete this.filters[key];
-        });
+        this.filters = {};
         this.filtered = this.data;
-        return this.filtered;
+        return this.getFilteredData();
     }
     /**
      * Update filtered array.
@@ -117,12 +115,12 @@ export default class Filter {
      *
      * @memberOf Filter
      */
-    getFilteredData = () => this.filtered;
+    getFilteredData = () => this.filtered
     /**
      * Getter for filter
-     * @returns {any} anything you pass to filterValue
+     * @returns {FilterValue | null} return filter value
      */
-    getFilter(name) {
+    getFilter = (name) => {
         if (this.filters[name]) {
             return this.filters[name];
         }

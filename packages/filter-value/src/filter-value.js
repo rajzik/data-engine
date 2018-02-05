@@ -22,14 +22,14 @@ export default class FilterValue {
      */
     constructor(name = null, item = null, type = null) {
         this.originaItem = null;
-        this.updateName(name);
+        this.Name = name;
         if (type !== null) {
-            this.updateType(type);
+            this.Type = type;
         }
         if (item === null) {
             return;
         }
-        this.updateValue(item);
+        this.Value = item;
     }
     /**
      * Preparing item for right validation.
@@ -59,7 +59,7 @@ export default class FilterValue {
      * @param {string} name new name
      * @memberOf FilterValue
      */
-    updateName = (name) => {
+    set Name(name) {
         if (typeof name === 'string') {
             this.name = name;
         }
@@ -88,7 +88,7 @@ export default class FilterValue {
      *
      * @memberOf FilterValue
      */
-    updateType = (type) => {
+    set Type(type) {
         if (this.validStaticType(type)) {
             this.staticType = type;
         }
@@ -109,7 +109,7 @@ export default class FilterValue {
      * @param {any} item new item
      * @memberOf FilterValue
      */
-    updateValue = (item) => {
+    set Value(item) {
         this.originaItem = item;
         this.type = this.checkValidity(item);
 
@@ -123,7 +123,7 @@ export default class FilterValue {
     /**
      * Getter for original value
      */
-    get value() {
+    get Value() {
         return this.originaItem;
     }
     /**

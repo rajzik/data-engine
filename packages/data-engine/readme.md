@@ -70,9 +70,9 @@ const filter3 = new FilterValue('name', 'Criteria', 'type');
 
 Updating filter value 
 ```javascript
-    filter.updateName('New Name');
-    filter.updateValue(/New value/i);
-    filter.updateType('regex');
+    filter.Name = 'New Name';
+    filter.Value = /New value/i;
+    filter.Type = 'regex';
 ```
 
 Removing type 
@@ -82,8 +82,8 @@ Removing type
 
 Getting values
 ``` javascript
-    const name = filter.getName();
-    const value = filter.getValue();
+    const name = filter.Name;
+    const value = filter.Value;
 ```
 
 ## Possible value types

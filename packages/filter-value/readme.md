@@ -22,8 +22,8 @@ Removing type
 
 Getting values
 ``` javascript
-    const name = filter.getName();
-    const value = filter.getValue();
+    const name = filter.Name;
+    const value = filter.Value;
 ```
 
 ## Possible value types
