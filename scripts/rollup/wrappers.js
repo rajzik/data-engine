@@ -1,12 +1,11 @@
-'use strict';
+
 
 const Bundles = require('./bundles');
 const EngineVersion = require('../../package.json').version;
 
-const UMD_DEV = Bundles.bundleTypes.UMD_DEV;
-const UMD_PROD = Bundles.bundleTypes.UMD_PROD;
-const NODE_DEV = Bundles.bundleTypes.NODE_DEV;
-const NODE_PROD = Bundles.bundleTypes.NODE_PROD;
+const {
+    UMD_DEV, UMD_PROD, NODE_DEV, NODE_PROD,
+} = Bundles.bundleTypes;
 
 
 const license = ` * Copyright Jan Silhan
@@ -15,8 +14,7 @@ const license = ` * Copyright Jan Silhan
  * LICENSE file in the root directory of this source tree.`;
 
 const wrappers = {
-    /***************** UMD_DEV *****************/
-    [UMD_DEV](source, globalName, filename, moduleType) {
+    [UMD_DEV](source, globalName, filename) {
         return `/** @license Engine v${EngineVersion}
  * ${filename}
  *
@@ -28,9 +26,9 @@ ${license}
 ${source}`;
     },
 
-    /***************** UMD_PROD *****************/
-    [UMD_PROD](source, globalName, filename, moduleType) {
-        return `/** @license React v${EngineVersion}
+    /** *************** UMD_PROD **************** */
+    [UMD_PROD](source, globalName, filename) {
+        return `/** @license Data-Engine v${EngineVersion}
  * ${filename}
  *
 ${license}
@@ -38,9 +36,9 @@ ${license}
 ${source}`;
     },
 
-    /***************** NODE_DEV *****************/
-    [NODE_DEV](source, globalName, filename, moduleType) {
-        return `/** @license React v${EngineVersion}
+    /** *************** NODE_DEV **************** */
+    [NODE_DEV](source, globalName, filename) {
+        return `/** @license Data-Engine v${EngineVersion}
  * ${filename}
  *
 ${license}
@@ -55,9 +53,9 @@ ${source}
 }`;
     },
 
-    /***************** NODE_PROD *****************/
-    [NODE_PROD](source, globalName, filename, moduleType) {
-        return `/** @license React v${EngineVersion}
+    /** *************** NODE_PROD **************** */
+    [NODE_PROD](source, globalName, filename) {
+        return `/** @license Data-Engine v${EngineVersion}
  * ${filename}
  *
 ${license}

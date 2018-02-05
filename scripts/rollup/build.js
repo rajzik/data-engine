@@ -59,20 +59,12 @@ function handleRollupError(error) {
     console.error(error.message);
     const { file, line, column, } = error.loc;
     if (file) {
-        // This looks like an error from Rollup, e.g. missing export.
-        // We'll use the accurate line numbers provided by Rollup but
-        // use Babel code frame because it looks nicer.
         const rawLines = fs.readFileSync(file, 'utf-8');
-        // column + 1 is required due to rollup counting column start position from 0
-        // whereas babel-code-frame counts from 1
         const frame = codeFrame(rawLines, line, column + 1, {
             highlightCode: true,
         });
         console.error(frame);
     } else {
-        // This looks like an error from a plugin (e.g. Babel).
-        // In this case we'll resort to displaying the provided code frame
-        // because we can't be sure the reported location is accurate.
         console.error(error.codeFrame);
     }
 }
