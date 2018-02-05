@@ -36,7 +36,7 @@ export default class Sort {
     updateData = (data, shouldSort = false) => {
         this.data = data;
         if (shouldSort) {
-            return this.justSort();
+            return this.sortData();
         }
         this.currentName = null;
 
@@ -152,7 +152,7 @@ export default class Sort {
      * @return {Array} sorted data
      * @memberOf Sort
      */
-    justSort = () => {
+    sortData = () => {
         if (this.currentName) {
             return this.data.sort(this.sortFunc);
         }
@@ -164,7 +164,7 @@ export default class Sort {
      * @return {Array} reversed data
      * @memberOf Sort
      */
-    justReverse = () => this.data.reverse();
+    reverseData = () => this.data.reverse();
     /**
      * Getter for data
      *
