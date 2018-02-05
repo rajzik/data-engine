@@ -5,7 +5,7 @@
       "bundleType": "UMD_DEV",
       "packageName": "data-engine",
       "size": 23571,
-      "gzip": 4847
+      "gzip": 4845
     },
     {
       "filename": "data-engine.production.min.js",
@@ -19,7 +19,7 @@
       "bundleType": "NODE_DEV",
       "packageName": "data-engine",
       "size": 23406,
-      "gzip": 4809
+      "gzip": 4811
     },
     {
       "filename": "data-engine.production.min.js",
