@@ -1,3 +1,4 @@
+// @flow
 /**
  * @providesModule FilterValue
  */
@@ -7,10 +8,15 @@ import regexEscape from './regex-escape';
 
 const staticTypes = ['number', 'string', 'regexp', 'boolean'];
 
-// TODO: check static types
 
 export default class FilterValue {
     static regexEscape = regexEscape;
+    originaItem: mixed = null;
+    name: string = '';
+    type: mixed = null;
+    item: mixed = null;
+    staticType: mixed = null;
+    compareFunc: (toCompare: mixed) => boolean = (toCompare: mixed): boolean => !!toCompare;
     /**
      * Creates an instance of FilterValue.
      * string, number, regexp, function, array of items mentioned before
@@ -20,7 +26,7 @@ export default class FilterValue {
      * @param {any} type - type of item
      * @memberOf FilterValue
      */
-    constructor(name = null, item = null, type = null) {
+    constructor(name?: string = '', item?: mixed = null, type?: mixed = null) {
         this.originaItem = null;
         this.updateName(name);
         if (type !== null) {
@@ -39,7 +45,7 @@ export default class FilterValue {
      * @return {Array/any} right element.
      * @memberOf FilterValue
      */
-    prepareItem(item) {
+    prepareItem(item: any) {
         switch (this.type) {
         case 'array':
             if (Array.isArray(item[item.length - 1])) {
@@ -59,10 +65,8 @@ export default class FilterValue {
      * @param {string} name new name
      * @memberOf FilterValue
      */
-    updateName = (name) => {
-        if (typeof name === 'string') {
-            this.name = name;
-        }
+    updateName = (name: string) => {
+        this.name = name;
     }
     /**
      * Getter for name
@@ -71,7 +75,7 @@ export default class FilterValue {
      * @return {string} name
      * @memberOf FilterValue
      */
-    get getName() {
+    get getName(): string {
         return this.name;
     }
     /**
@@ -80,7 +84,7 @@ export default class FilterValue {
      * @return {boolean} true when it's possible to retype
      * @memberOf FilterValue
      */
-    validStaticType = item => staticTypes.some(key => key === item);
+    validStaticType: boolean = (item: string): boolean => staticTypes.some(key => key === item)
     /**
      * Setter for type
      *
@@ -88,7 +92,7 @@ export default class FilterValue {
      *
      * @memberOf FilterValue
      */
-    updateType = (type) => {
+    updateType = (type: mixed) => {
         if (this.validStaticType(type)) {
             this.staticType = type;
         }
@@ -109,7 +113,7 @@ export default class FilterValue {
      * @param {any} item new item
      * @memberOf FilterValue
      */
-    updateValue = (item) => {
+    updateValue = (item: mixed) => {
         this.originaItem = item;
         this.type = this.checkValidity(item);
 
@@ -123,7 +127,7 @@ export default class FilterValue {
     /**
      * Getter for original value
      */
-    get value() {
+    get value(): mixed {
         return this.originaItem;
     }
     /**
@@ -133,7 +137,8 @@ export default class FilterValue {
      * @return {boolean} compare value
      * @memberOf FilterValue
      */
-    basicCompare = toCompare => this.item === toCompare;
+    basicCompare: (toCompare: mixed) => boolean = (toCompare: mixed): boolean =>
+        this.item === toCompare;
     /**
      * Compares dates
      * @see ./update-prototype
@@ -141,7 +146,8 @@ export default class FilterValue {
      * @param {Date}
      * @memberOf FilterValue
      */
-    dateCompare = toCompare => this.item.$.compare(toCompare);
+    dateCompare: (toCompare: mixed) => boolean = (toCompare: mixed): boolean =>
+        this.item.$.compare(toCompare);
     /**
      * Basic regexp test
      *
@@ -150,7 +156,8 @@ export default class FilterValue {
      *
      * @memberOf FilterValue
      */
-    regexpCompare = toCompare => this.item.test(`${toCompare}`);
+    regexpCompare: (toCompare: mixed) => boolean = (toCompare: mixed): boolean =>
+        this.item.test(`${toCompare}`);
     /** comparing array of FilterValue!
      *
      * @param {any} toCompare - item which will be compared.
@@ -158,7 +165,8 @@ export default class FilterValue {
      * @return {boolean} compare value
      * @memberOf FilterValue
      */
-    arrayCompare = toCompare => this.item.some(itm => itm.compare(toCompare));
+    arrayCompare: (toCompare: mixed) => boolean = (toCompare: mixed): boolean =>
+        this.item.some(itm => itm.compare(toCompare));
     /**
      * Function compare when user give compare item as function!
      *
@@ -167,7 +175,8 @@ export default class FilterValue {
      * @return {boolean} compare value
      * @memberOf FilterValue
      */
-    funcCompare = toCompare => this.item(toCompare);
+    funcCompare: (toCompare: mixed) => boolean = (toCompare: mixed): boolean =>
+        this.item(toCompare);
 
     /**
      * Compares range
@@ -176,9 +185,17 @@ export default class FilterValue {
      * @param {any} toCompare item which will be compared
      * @memberOf FilterValue
      */
-    rangeCompare = toCompare =>
+    rangeCompare: (toCompare: mixed) => boolean = (toCompare: mixed): boolean =>
         this.item.from.$.isLess(toCompare)
         && this.item.to.$.isGreater(toCompare);
+    /**
+     * Applying filter to item which will return true/false. True when it should be ignored.
+     *
+     * @param {any} toCompare - item which will be compared.
+     * @memberOf FilterValue
+     */
+    compare: (toCompare: mixed) => boolean = (toCompare: mixed): boolean =>
+        this.compareFunc(toCompare);
     /**
      * Basic types of testable items.
      * Enum for data types
@@ -202,7 +219,7 @@ export default class FilterValue {
      * @return {number} retyped number
      * @memberOf FilterValue
      */
-    numberRetype = item => parseFloat(item);
+    numberRetype = (item: any): number => parseFloat(item);
     /**
      * Retype anything to string
      *
@@ -210,7 +227,7 @@ export default class FilterValue {
      * @return {string} retyped string
      * @memberOf FilterValue
      */
-    stringRetype = item => `${item}`;
+    stringRetype = (item: any): string => `${item}`;
     /**
      * Retype anything to regex
      *
@@ -218,7 +235,7 @@ export default class FilterValue {
      * @return {Regexp} retyped Regexp
      * @memberOf FilterValue
      */
-    regexpRetype = item => new RegExp(`${FilterValue.regexEscape(item)}`);
+    regexpRetype = (item: any): RegExp => new RegExp(`${FilterValue.regexEscape(item)}`);
     /**
      * Retype anything to bool
      *
@@ -226,7 +243,7 @@ export default class FilterValue {
      * @return {bool} retyped bool
      * @memberOf FilterValue
      */
-    booleanRetype = item => !!item;
+    booleanRetype = (item: any): boolean => !!item;
     /**
      * Enum for retype
      *
@@ -239,13 +256,7 @@ export default class FilterValue {
         regexp: this.regexpRetype,
         boolean: this.booleanRetype,
     }
-    /**
-     * Applying filter to item which will return true/false. True when it should be ignored.
-     *
-     * @param {any} toCompare - item which will be compared.
-     * @memberOf FilterValue
-     */
-    compare = toCompare => this.compareFunc(toCompare);
+
     /**
      * Checking validity of supported types
      * valid types are
@@ -255,7 +266,7 @@ export default class FilterValue {
      * @return {string/null} return type if exist
      * @memberOf FilterValue
      */
-    checkValidity = (item) => {
+    checkValidity = (item: any): string => {
         let type = this.checkRangeAbleTypes(item);
         if (!type) {
             switch (typeof item) {
@@ -289,24 +300,21 @@ export default class FilterValue {
      * @return {string/null} name of type if exist
      * @memberOf FilterValue
      */
-    checkRangeAbleTypes = (item) => {
-        let type = null;
+    checkRangeAbleTypes = (item: any): string => {
         switch (typeof item) {
         case 'string':
-            type = 'string';
-            break;
+            return 'string';
         case 'number':
-            type = 'number';
-            break;
+            return 'number';
         case 'object':
             if (item instanceof Date) {
-                type = 'date';
+                return 'date';
             }
             break;
         default:
-            break;
+            return '';
         }
-        return type;
+        return '';
     }
 }
 
