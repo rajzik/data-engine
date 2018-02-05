@@ -26,8 +26,8 @@ class DataEngine {
      */
     constructor(data = null, primaryKey = null, sortFunction = null) {
         this.data = data;
-        this.filter = new Filter(data);
-        this.sort = new Sort(data, primaryKey, sortFunction);
+        this.filterEngine = new Filter(data);
+        this.sortEngine = new Sort(data, primaryKey, sortFunction);
     }
     /**
      * Setter for data
@@ -37,7 +37,7 @@ class DataEngine {
      * @memberOf DataEngine
      */
     setData = (data) => {
-        this.data = this.sort.updateData(this.filter.setData(data));
+        this.data = this.sortEngine.updateData(this.filterEngine.setData(data));
         return this.data;
     }
     /**
@@ -48,7 +48,7 @@ class DataEngine {
      * @memberOf DataEngine
      */
     updateFilter = (items) => {
-        this.data = this.sort.updateData(this.filter.update(items), true);
+        this.data = this.sortEngine.updateData(this.filterEngine.update(items), true);
         return this.data;
     }
     /**
@@ -59,7 +59,7 @@ class DataEngine {
      * @memberOf DataEngine
      */
     updateSort = (name) => {
-        this.data = this.sort.sortBy(name);
+        this.data = this.sortEngine.sortBy(name);
         return this.data;
     }
     /**
@@ -70,7 +70,7 @@ class DataEngine {
      * @memberOf DataEngine
      */
     removeFilter = (names) => {
-        this.data = this.sort.updateData(this.filter.removeFilter(names), true);
+        this.data = this.sortEngine.updateData(this.filterEngine.removeFilter(names), true);
         return this.data;
     }
     /**
@@ -81,7 +81,7 @@ class DataEngine {
      * @memberOf DataEngine
      */
     clearFilters = () => {
-        this.data = this.sort.updateData(this.filter.clearFilters(), true);
+        this.data = this.sortEngine.updateData(this.filterEngine.clearFilters(), true);
         return this.data;
     }
     /**
@@ -92,7 +92,7 @@ class DataEngine {
      * @memberOf DataEngine
      */
     resort = () => {
-        this.data = this.sort.justSort();
+        this.data = this.sortEngine.sortData();
         return this.data;
     }
     /**
@@ -101,27 +101,27 @@ class DataEngine {
      * @param {function} new sorting function
      * @memberOf DataEngine
      */
-    setSortFunction = func => this.sort.setSortFunction(func);
+    setSortFunction = func => this.sortEngine.setSortFunction(func);
     /**
      * Setting default sort function
      *
      *
      * @memberOf DataEngine
      */
-    setDefaultSort = () => this.sort.setDefaultSort();
+    setDefaultSort = () => this.sortEngine.setDefaultSort();
     /**
      * Setup default sort function
      *
      * @memberOf DataEngine
      */
-    removePrimaryKey = () => this.sort.removePrimaryKey();
+    removePrimaryKey = () => this.sortEngine.removePrimaryKey();
     /**
      * Setter for primary key
      *
      * @param {string} primary key
      * @memberOf DataEngine
      */
-    setPrimaryKey = primaryKey => this.sort.setPrimaryKey(primaryKey);
+    setPrimaryKey = primaryKey => this.sortEngine.setPrimaryKey(primaryKey);
     /**
      * Clearing sort
      *
@@ -129,9 +129,14 @@ class DataEngine {
      * @memberOf DataEngine
      */
     clearSort = () => {
-        this.data = this.filter.getFilteredData();
+        this.data = this.filterEngine.getFilteredData();
         return this.data;
     }
+    /**
+     * Getter for filter original value
+     * @param {string | FilterValue} name - name of wanted filter
+     */
+    getFilter = name => this.filterEngine.getFilter(name);
     /**
      * Getter for data
      *
