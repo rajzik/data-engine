@@ -10,12 +10,26 @@ const staticTypes = ['number', 'string', 'regexp', 'boolean'];
 // TODO: check static types
 
 export default class FilterValue {
-    static fromJSON(obj) {
-        if (typeof obj === 'string') {
-            const { name, item, type, } = JSON.parse(obj);
-            return new FilterValue(name, item, type);
+    static regexEscape = regexEscape;
+    /**
+     * Creates an instance of FilterValue.
+     * string, number, regexp, function, array of items mentioned before
+     *
+     * @param {string} name - name of filter
+     * @param {any} item - value
+     * @param {any} type - type of item
+     * @memberOf FilterValue
+     */
+    constructor(name = null, item = null, type = null) {
+        this.originaItem = null;
+        this.updateName(name);
+        if (type !== null) {
+            this.updateType(type);
         }
-        return null;
+        if (item === null) {
+            return;
+        }
+        this.updateValue(item);
     }
     /**
      * Preparing item for right validation.
@@ -39,26 +53,6 @@ export default class FilterValue {
             return item;
         }
     }
-    static regexEscape = regexEscape;
-    /**
-     * Creates an instance of FilterValue.
-     * string, number, regexp, function, array of items mentioned before!
-     *
-     * @param {string} name - name of filter!
-     * @param {any} item - filter value!
-     *
-     * @memberOf FilterValue
-     */
-    constructor(name = null, item = null, type = null) {
-        this.updateName(name);
-        if (type !== null) {
-            this.updateType(type);
-        }
-        if (item === null) {
-            return;
-        }
-        this.updateValue(item);
-    }
     /**
      * Setter for name
      *
@@ -70,6 +64,22 @@ export default class FilterValue {
             this.name = name;
         }
     }
+    /**
+     * Getter for name
+     *
+     * @readonly
+     * @return {string} name
+     * @memberOf FilterValue
+     */
+    get getName() {
+        return this.name;
+    }
+    /**
+     * Validation if possible to static type item
+     * @param {any} item
+     * @return {boolean} true when it's possible to retype
+     * @memberOf FilterValue
+     */
     validStaticType = item => staticTypes.some(key => key === item);
     /**
      * Setter for type
@@ -92,16 +102,7 @@ export default class FilterValue {
     removeType = () => {
         this.staticType = null;
     }
-    /**
-     * Getter for name
-     *
-     * @readonly
-     * @return {string} name
-     * @memberOf FilterValue
-     */
-    get getName() {
-        return this.name;
-    }
+
     /** Setter for new value
      * Update filter value
      *
@@ -109,6 +110,7 @@ export default class FilterValue {
      * @memberOf FilterValue
      */
     updateValue = (item) => {
+        this.originaItem = item;
         this.type = this.checkValidity(item);
 
         if (this.type) {
@@ -118,7 +120,12 @@ export default class FilterValue {
             throw new TypeError('item isn\'t valid filter value, possible types are string, RegExp, number, function, array of types mentioned before.');
         }
     }
-
+    /**
+     * Getter for original value
+     */
+    get value() {
+        return this.originaItem;
+    }
     /**
      * Basic exact compare. `===`! for number and strings.
      *
