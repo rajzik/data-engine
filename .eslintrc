@@ -33,6 +33,8 @@
             "imports": "only-multiline",
             "exports": "only-multiline",
             "functions": "never"
-        }]
+        }],
+        "global-require": "off",
+        "import/no-unresolved": "off"
     }
 }

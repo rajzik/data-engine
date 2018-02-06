@@ -16,11 +16,11 @@ export default class Filter {
      *
      * @memberOf Filter
      */
-    constructor(data = null) {
-        this.data = data;
+    constructor(data = null, fetchFunction = null) {
+        this.Data = data;
         this.filtered = data;
+        this.FetchFunction = fetchFunction;
         this.filters = {};
-        this.serverFilters = {};
     }
     /**
      * Setter for data
@@ -31,6 +31,49 @@ export default class Filter {
     setData = (data) => {
         this.data = data;
         return this.updateFilter();
+    }
+    /**
+     * Setter for data
+     *
+     * @param {Array} data new data
+     * @memberOf Filter
+     */
+    set Data(data) {
+        this.data = data;
+    }
+    /**
+     * Setter for data
+     *
+     * @param {Array} data new data
+     * @memberOf Filter
+     */
+    get Data() {
+        return this.data;
+    }
+    /**
+     * Getter for fetch function
+     * @returns {function}
+     */
+    get FetchFunction() {
+        return this.fetchFunction;
+    }
+    /**
+     * Setter for fetch function
+     * @param {function} fetchFunction
+     */
+    set FetchFunction(fetchFunction) {
+        if (typeof fetchFunction === 'function') {
+            this.fetchFunction = fetchFunction;
+        }
+    }
+    async fetchData(...args) {
+        try {
+            this.Data = await this.FetchFunction(...args);
+            this.updateFilter();
+            return this.Data;
+        } catch (e) {
+            throw new Error(e);
+        }
     }
     /**
      * Add or modify filter value
@@ -116,6 +159,16 @@ export default class Filter {
      * @memberOf Filter
      */
     getFilteredData = () => this.filtered
+    /**
+     * Simple getter
+     *
+     * @returns {array} filtered data
+     *
+     * @memberOf Filter
+     */
+    get FilteredData() {
+        return this.filtered;
+    }
     /**
      * Getter for filter
      * @returns {FilterValue | null} return filter value

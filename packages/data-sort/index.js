@@ -1,4 +1,4 @@
-'use strict';
+
 
 const Sort = require('./src/data-sort');
 
