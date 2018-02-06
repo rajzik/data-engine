@@ -212,14 +212,6 @@ export default class FilterValue {
      */
     stringRetype = item => `${item}`;
     /**
-     * Retype anything to regex
-     *
-     * @param {any} item which should be retyped
-     * @return {Regexp} retyped Regexp
-     * @memberOf FilterValue
-     */
-    regexpRetype = item => new RegExp(`${FilterValue.regexEscape(item)}`);
-    /**
      * Retype anything to bool
      *
      * @param {any} item which should be retyped
@@ -236,7 +228,6 @@ export default class FilterValue {
     RETYPE = {
         number: this.numberRetype,
         string: this.stringRetype,
-        regexp: this.regexpRetype,
         boolean: this.booleanRetype,
     }
     /**

@@ -3,11 +3,22 @@
 Creating new filter
 ``` javascript
 const filterEngine = new Filter(data);
+// with fetching from server
+const filterEngine = new Filter(data, fetchFunction);
+// with instance of sort
+const filterEngine = new Filter(data, fetchFunction, sort);
+// only with sort
+const filterEngine = new Filter(data, null, sort);
 ```
 
 Updating data
 ```javascript
     filterEngine.setData(newData);
+```
+
+Getting original data
+```javascript
+    const originalData = filterEngine.Data;
 ```
 
 Adding and updating filters
@@ -30,12 +41,20 @@ Getting data
     const filteredData = filterEngine.getFilteredData();
 ```
 
+Setting fetch function
+Fetch function has to return data from server when called;
+it's javascript promise
+```javascript
+    filterEngine.FetchFunction = () => {};
+```
 
-## WHAT NEXT
+Fetching data from server
+```javascript
+    const filteredData = await filterEngine.fetchData(...args);
+```
 
-> Add promise like for big data!
-> 
-> Test all usecases
-> 
-> Set filter-value manually
+Getting sort engine from filter
+```javascript
+    const sorter = filterEngine.SortEngine;
+```
 

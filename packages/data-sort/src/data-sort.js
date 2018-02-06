@@ -33,7 +33,7 @@ export default class Sort {
      * @param {boolean} shouldSort should be resorted
      * @memberOf Sort
      */
-    setData = (data, shouldSort = false) => {
+    setData = (data, shouldSort = true) => {
         this.data = data;
         if (shouldSort) {
             return this.sortData();
@@ -53,6 +53,9 @@ export default class Sort {
             this.sortFunc = func;
             this.isCustomFunction = true;
         }
+    }
+    set SortFunction(func) {
+        this.setSortFunction(func);
     }
     /**
      * Setter for primary key (fallback key)

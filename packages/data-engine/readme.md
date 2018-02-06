@@ -9,7 +9,7 @@ Create new data-engine
     const engine = new DataEngine();
     const engine2 = new DataEngine(data);
     const engine3 = new DataEngine(data, 'primary key');
-    const engine4 = new DataEngine(data, 'primary key', sortFunction);
+    const engine4 = new DataEngine(data, 'primary key', sortFunction, fetchFunction);
 ```
 
 Set data 
@@ -25,7 +25,7 @@ Updating filters
 
 Updating sort
 ```javascript
-    const sorted = engine.updateSort('new name');
+    const sorted = engine.sortBy('new name');
 ```
 
 > Note: when you call update sort with same key it will automatically reverse array;
@@ -47,7 +47,7 @@ Clearing sort
 
 Resorting
 ```javascript
-    const filteredData = engine.resort();
+    const filteredData = engine.sortData();
 ```
 
 Getting data

@@ -77,8 +77,7 @@ export default class Filter {
     async fetchData(...args) {
         try {
             this.Data = await this.FetchFunction(...args);
-            this.updateFilter();
-            return this.Data;
+            return this.updateFilter();
         } catch (e) {
             throw new Error(e);
         }

@@ -5,21 +5,23 @@ Creating new Sort
     const sort = new Sort(data);
     const sort2 = new Sort(data, 'Primary key');
     const sort3 = new Sort(data, 'Primary key', CustomSortFunction);
-    // Data = Array of some json objects, primary key = fallback name for sort when data of same key have same value, CustomSortFunction = Custom function which will be called when you call sortBy
+
 ```
 
 Updating data
 ```javascript
-    // this line will return data as is.
-    const data = sort.updateData(newData);
     // This line will resort data.
-    const data2 = sort.updateData(newData, true);
+    const data = sort.updateData(newData);
+    // this line will return data as is.
+    const data2 = sort.updateData(newData, false);
 ```
 
 Updating criteria
 ```javascript
     sort.setSortFunction(CustomFunction);
+    sort.SortFunction = CustomFunction;
     sort.setPrimaryKey('new key');
+    sort.PrimaryKey = 'new key';
 ```
 
 Removing criteria
@@ -40,15 +42,10 @@ Getting data
 
 Resorting data
 ```javascript
-    const data = sort.justSort();
+    const data = sort.sortData();
 ```
 
 
 ## WHAT NEXT
 
 > Add promise like for big data!
-> 
-> Test all usecases
-> 
-> Set filter-value manually
-
