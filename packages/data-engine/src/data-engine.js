@@ -21,122 +21,94 @@ class DataEngine {
      * @param {Array} [data=null]
      * @param {string} [primaryKey=null]
      * @param {function} [sortFunction=null]
+     * @param {function} [fetchFunction=null]
      *
      * @memberOf DataEngine
      */
-    constructor(data = null, primaryKey = null, sortFunction = null) {
+    constructor(data = null, primaryKey = null, sortFunction = null, fetchFunction = null) {
         this.data = data;
-        this.filterEngine = new Filter(data);
         this.sortEngine = new Sort(data, primaryKey, sortFunction);
+        this.filterEngine = new Filter(data, fetchFunction, this.sortEngine);
     }
     /**
-     * Setter for data
-     *
-     * @param {Array} new data
-     * @return {array} sorted and filtered array
-     * @memberOf DataEngine
+     * Getter for filter Engine
+     * @returns {Filter} instance of our filter
      */
-    setData = (data) => {
-        this.data = this.sortEngine.setData(this.filterEngine.setData(data));
-        return this.data;
+    get FilterEngine() {
+        return this.filterEngine;
     }
     /**
-     * Update filter provider
-     *
-     * @param {Array} items filter elements
-     * @return {array} sorted and filtered array
-     * @memberOf DataEngine
+     * Getter for sort engine
+     * @returns {Sort} instance of our sort
      */
-    updateFilter = (items) => {
-        this.data = this.sortEngine.setData(this.filterEngine.update(items), true);
-        return this.data;
+    get SortEngine() {
+        return this.sortEngine;
     }
     /**
-     * Update sort provider
-     *
-     * @param {string} name key which will be sorted on
-     * @return {array} sorted and filtered array
-     * @memberOf DataEngine
+     * Setter for updating data
      */
-    updateSort = (name) => {
-        this.data = this.sortEngine.sortBy(name);
-        return this.data;
-    }
+    setData = data => this.FilterEngine.setData(data);
     /**
-     * Remove filter provider
-     *
-     * @param {Array} names names which will be removed
-     * @return {array} sorted and filtered array
-     * @memberOf DataEngine
+     * Updating filters
      */
-    removeFilter = (names) => {
-        this.data = this.sortEngine.setData(this.filterEngine.removeFilter(names), true);
-        return this.data;
-    }
+    updateFilters = (...items) => this.FilterEngine.update(...items);
     /**
-     * Clearing filters
-     *
-     *
-     * @return {array} sorted and filtered array
-     * @memberOf DataEngine
+     * Removing filters
      */
-    clearFilters = () => {
-        this.data = this.sortEngine.setData(this.filterEngine.clearFilters(), true);
-        return this.data;
-    }
+    removeFilters = (...items) => this.FilterEngine.removeFilters(...items);
     /**
-     * Resorting data
-     *
-     *
-     * @return {array} sorted and filtered array
-     * @memberOf DataEngine
+     * Clearing all filters
      */
-    resort = () => {
-        this.data = this.sortEngine.sortData();
-        return this.data;
-    }
+    clearFilters = () => this.FilterEngine.clearFilters();
     /**
-     * Setting custom sorting function
+     * Setter for custom function
      *
-     * @param {function} new sorting function
-     * @memberOf DataEngine
+     * @param {function} func your custom sort function
+     * @memberOf Sort
      */
-    setSortFunction = func => this.sortEngine.setSortFunction(func);
+    setSortFunction = func => this.SortEngine.setSortFunction(func);
     /**
-     * Setting default sort function
+     * Setter for primary key (fallback key)
      *
-     *
-     * @memberOf DataEngine
+     * @param {string} key primary key
+     * @memberOf Sort
      */
-    setDefaultSort = () => this.sortEngine.setDefaultSort();
+    setPrimaryKey = key => this.SortEngine.setPrimaryKey(key);
+    /**
+     * Remover primary key set to default
+     *
+     *
+     * @memberOf Sort
+     */
+    removePrimaryKey = () => this.SortEngine.removePrimaryKey();
     /**
      * Setup default sort function
      *
-     * @memberOf DataEngine
-     */
-    removePrimaryKey = () => this.sortEngine.removePrimaryKey();
-    /**
-     * Setter for primary key
      *
-     * @param {string} primary key
-     * @memberOf DataEngine
+     * @memberOf Sort
      */
-    setPrimaryKey = primaryKey => this.sortEngine.setPrimaryKey(primaryKey);
+    setDefaultSort = () => this.SortEngine.setDefaultSort();
     /**
-     * Clearing sort
+     * sort by name, sets new name and check if we need to only reverse
      *
-     * @return {array} sorted and filtered array
-     * @memberOf DataEngine
+     * @param {string} name key for sort
+     * @memberOf Sort
      */
-    clearSort = () => {
-        this.data = this.filterEngine.getFilteredData();
-        return this.data;
-    }
+    sortBy = name => this.SortEngine.sortBy(name);
     /**
-     * Getter for filter original value
-     * @param {string | FilterValue} name - name of wanted filter
+     * Well just sort function. when we need resort.
+     *
+     * @return {Array} sorted data
+     * @memberOf Sort
      */
-    getFilter = name => this.filterEngine.getFilter(name);
+    sortData = () => this.SortEngine.sortData();
+    /**
+     * well just reverse sorted array
+     *
+     * @return {Array} reversed data
+     * @memberOf Sort
+     */
+    reverseData = () => this.SortEngine.reverseData();
     /**
      * Getter for data
      *
@@ -144,6 +116,9 @@ class DataEngine {
      * @memberOf DataEngine
      */
     getData = () => this.data;
+    get Data() {
+        return this.getData();
+    }
 }
 
 

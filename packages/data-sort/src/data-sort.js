@@ -68,6 +68,9 @@ export default class Sort {
             }
         }
     }
+    set PrimaryKey(key) {
+        this.setPrimaryKey(key);
+    }
     /**
      * Remover primary key set to default
      *

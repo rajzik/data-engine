@@ -3,6 +3,7 @@
  */
 
 import FilterValue from 'filter-value';
+import Sort from 'data-sort';
 
 /**
  * Filter engine
@@ -10,17 +11,19 @@ import FilterValue from 'filter-value';
  * @class Filter
  */
 export default class Filter {
+    updateFce = this.filterWOSort;
     /**
      * Creates an instance of Filter.
      * @param {any} data - initial data
      *
      * @memberOf Filter
      */
-    constructor(data = null, fetchFunction = null) {
+    constructor(data = null, fetchFunction = null, sortEngine = null) {
         this.Data = data;
         this.filtered = data;
         this.FetchFunction = fetchFunction;
         this.filters = {};
+        this.SortEngine = sortEngine;
     }
     /**
      * Setter for data
@@ -39,7 +42,7 @@ export default class Filter {
      * @memberOf Filter
      */
     set Data(data) {
-        this.data = data;
+        this.setData(data);
     }
     /**
      * Setter for data
@@ -66,6 +69,11 @@ export default class Filter {
             this.fetchFunction = fetchFunction;
         }
     }
+    /**
+     * Get data from server after filter it with our filters
+     * and return filtered data;
+     * @param {any} args - arguments passed to your function
+     */
     async fetchData(...args) {
         try {
             this.Data = await this.FetchFunction(...args);
@@ -80,7 +88,6 @@ export default class Filter {
      *
      *
      * @param {Array} items - array of filter items
-     * @throws {TypeError} when item isn't object
      * @throws {TypeError} when item isn't instance of FilterValue
      * @return {Array} new filtered array
      * @memberOf Filter
@@ -89,10 +96,9 @@ export default class Filter {
         let returnFunc = this.getFilteredData;
         items.forEach((item) => {
             // Exception when item isn't filterValue!
-            if (!((typeof item === 'object') && (item instanceof FilterValue))) {
+            if (!(item instanceof FilterValue)) {
                 throw new TypeError(`${item} has to have filterValue instance`);
             }
-
             this.filters[item.Name] = item;
             returnFunc = this.updateFilter;
         });
@@ -106,7 +112,7 @@ export default class Filter {
      * @return {Array} new filtered array
      * @memberOf Filter
      */
-    removeFilter = (...names) => {
+    removeFilters = (...names) => {
         let returnFunc = this.getFilteredData;
         names.forEach((item) => {
             const removalName = typeof item === 'string' ? item : item.Name;
@@ -139,8 +145,9 @@ export default class Filter {
             throw new Error('Data are null and cannot be filtered!');
         }
         this.filtered = this.data.filter(this.filterAll);
-        return this.filtered;
+        return this.getFilteredData();
     }
+
     /**
      * Filter line by all criteria.
      *
@@ -158,7 +165,7 @@ export default class Filter {
      *
      * @memberOf Filter
      */
-    getFilteredData = () => this.filtered
+    getFilteredData = () => this.updateFce();
     /**
      * Simple getter
      *
@@ -167,8 +174,16 @@ export default class Filter {
      * @memberOf Filter
      */
     get FilteredData() {
-        return this.filtered;
+        return this.getFilteredData();
     }
+    /**
+     * Helper function when sort is not in filter
+     */
+    filterWOSort = () => this.filtered
+    /**
+     * Helper function with sort;
+     */
+    filterWSort = () => this.SortEngine.setData(this.filtered)
     /**
      * Getter for filter
      * @returns {FilterValue | null} return filter value
@@ -178,6 +193,26 @@ export default class Filter {
             return this.filters[name];
         }
         return null;
+    }
+    /**
+     * Setter for sort engine
+     * @param {Sort} sortEngine - instance of Sort
+     */
+    set SortEngine(sortEngine) {
+        if (sortEngine instanceof Sort) {
+            this.sortEngine = sortEngine;
+            this.updateFce = this.filterWSort;
+        } else {
+            this.sortEngine = null;
+            this.updateFce = this.filterWOSort;
+        }
+    }
+    /**
+     * Getter for sort engine
+     * @returns {Sort} - instance of Sort
+     */
+    get SortEngine() {
+        return this.sortEngine;
     }
 }
 
