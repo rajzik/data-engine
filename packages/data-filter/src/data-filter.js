@@ -19,10 +19,10 @@ export default class Filter {
      * @memberOf Filter
      */
     constructor(data = null, sortEngine = null) {
-        this.Data = data;
         this.filtered = data;
         this.filters = {};
         this.SortEngine = sortEngine;
+        this.Data = data;
     }
     /**
      * Setter for data
