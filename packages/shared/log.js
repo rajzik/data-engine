@@ -1,11 +1,11 @@
 /* eslint-disable */
 
 function logf() {
-    console.log.call(arguments);
+    console.log(...arguments);
 }
 
 function warnf() {
-    console.warn.call(arguments);
+    console.warn(...arguments);
 }
 
 function noop() {};
