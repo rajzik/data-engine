@@ -116,7 +116,12 @@ export default class Sort {
      * @return {number} position of elements
      * @memberOf Sort
      */
-    comparePrimaryKey = (a, b) => a[this.primaryKey] > b[this.primaryKey]
+    comparePrimaryKey = (a, b) => {
+        const first = a[this.primaryKey];
+        const second = b[this.primaryKey];
+        if (first === second) return 0;
+        return (first > second ? 1 : -1);
+    }
     /**
      * Compare by current name
      *
@@ -125,7 +130,7 @@ export default class Sort {
      * @return {number} position of elements
      * @memberOf Sort
      */
-    compare = (a, b) => a[this.currentName] > b[this.currentName]
+    compare = (a, b) => (a[this.currentName] > b[this.currentName] ? 1 : -1);
     /**
      * sort by name, sets new name and check if we need to only reverse
      *
