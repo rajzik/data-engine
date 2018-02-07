@@ -19,12 +19,12 @@ export default class Sort {
      *
      * @memberOf Sort
      */
-    constructor(data, primaryKey = null, sortFunction = null) {
-        this.data = data;
-        this.sortDefault = () => {};
-        this.setPrimaryKey(primaryKey);
+    constructor(data = [], primaryKey = null, sortFunction = null) {
+        this.currentName = null;
         this.sortFunc = this.defaultSort;
+        this.setPrimaryKey(primaryKey);
         this.setSortFunction(sortFunction);
+        this.setData(data);
     }
     /**
      * Update data, refresh old data with new.
@@ -38,8 +38,6 @@ export default class Sort {
         if (shouldSort) {
             return this.sortData();
         }
-        this.currentName = null;
-
         return data;
     }
     /**
@@ -64,10 +62,14 @@ export default class Sort {
      * @memberOf Sort
      */
     setPrimaryKey = (key) => {
-        if (typeof key === 'string') {
+        if (!this.isCustomFunction) {
+            this.sortFunc = this.defaultSortWithKey;
+            return;
+        }
+        if (typeof key === 'string' && key.length > 0) {
             this.primaryKey = key;
-            if (!this.isCustomFunction) {
-                this.sortFunc = this.defaultSortWithKey;
+            if (this.currentName === null) {
+                this.currentName = key;
             }
         }
     }
@@ -122,10 +124,10 @@ export default class Sort {
      */
     sortBy = (name) => {
         if (this.currentName === name) {
-            return this.justReverse();
+            return this.reverseData();
         }
         this.currentName = name;
-        return this.justSort();
+        return this.sortData();
     };
     /**
      * default sort with key
@@ -138,7 +140,7 @@ export default class Sort {
      */
     defaultSortWithKey = (a, b) => {
         if (a[this.currentName] === b[this.currentName]) {
-            return this.sortDefault(a, b);
+            return this.comparePrimaryKey(a, b);
         }
         return this.compare(a, b);
     }
