@@ -149,11 +149,17 @@ export default class Filter {
     /**
      * Helper function when sort is not in filter
      */
-    filterWOSort = () => this.filtered
+    filterWOSort = () => {
+        console.log('invoking filter without sort');
+        return this.filtered;
+    }
     /**
      * Helper function with sort;
      */
-    filterWSort = () => this.SortEngine.setData(this.filtered)
+    filterWSort = () => {
+        console.log('invoking filter with sort');
+        return this.SortEngine.setData(this.filtered);
+    }
     /**
      * Getter for filter
      * @returns {FilterValue | null} return filter value

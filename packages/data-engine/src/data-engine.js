@@ -26,8 +26,7 @@ class DataEngine {
      * @memberOf DataEngine
      */
     constructor(data = null, primaryKey = null, sortFunction = null) {
-        this.sortEngine = new Sort(data, primaryKey, sortFunction);
-        this.filterEngine = new Filter(data, this.sortEngine);
+        this.filterEngine = new Filter(data, new Sort(data, primaryKey, sortFunction));
     }
     /**
      * Getter for filter Engine
@@ -41,7 +40,7 @@ class DataEngine {
      * @returns {Sort} instance of our sort
      */
     get SortEngine() {
-        return this.sortEngine;
+        return this.filterEngine.SortEngine;
     }
     /**
      * Setter for updating data
