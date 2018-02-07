@@ -31,7 +31,7 @@ const update = async ({
         const updateProjectPackage = async (project) => {
             const path = join(cwd, 'packages', project, 'package.json');
             const json = await readJson(path);
-
+            console.log(json);
             // Unstable packages (eg version < 1.0) are treated specially:
             // Rather than use the release version (eg 16.1.0)-
             // We just auto-increment the minor version (eg 0.1.0 -> 0.2.0).

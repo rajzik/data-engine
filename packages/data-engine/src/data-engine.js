@@ -26,7 +26,6 @@ class DataEngine {
      * @memberOf DataEngine
      */
     constructor(data = null, primaryKey = null, sortFunction = null) {
-        this.data = data;
         this.sortEngine = new Sort(data, primaryKey, sortFunction);
         this.filterEngine = new Filter(data, this.sortEngine);
     }
@@ -115,7 +114,7 @@ class DataEngine {
      * @return {array} sorted and filtered array
      * @memberOf DataEngine
      */
-    getData = () => this.data;
+    getData = () => this.FilterEngine.FilteredData;
     get Data() {
         return this.getData();
     }
