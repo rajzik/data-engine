@@ -32,7 +32,6 @@ const update = async ({
         const updateProjectPackage = async (project) => {
             const path = join(cwd, 'packages', project, 'package.json');
             const json = await readJson(path);
-            console.log(json);
 
             // Unstable packages (eg version < 1.0) are treated specially:
             // Rather than use the release version (eg 16.1.0)-
@@ -48,14 +47,15 @@ const update = async ({
             } else {
                 json.version = version;
             }
-            console.log(Object.keys(json.dependencies).reduce((acc, current) => {
+            console.log(json.dependencies);
+            json.dependencies = Object.keys(json.dependencies).reduce((acc, current) => {
                 const ret = { ...acc, [current]: json.dependencies[current], };
                 if (packages.some(item => item === current)) {
-                    ret[current] = version;
+                    ret[current] = `^${version}`;
                 }
                 return ret;
-            }, {}));
-
+            }, {});
+            console.log(json.dependencies);
             await writeJson(path, json, { spaces: 2, });
         };
         await Promise.all(packages.map(updateProjectPackage));
