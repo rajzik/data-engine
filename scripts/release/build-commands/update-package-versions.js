@@ -27,11 +27,13 @@ const update = async ({
         );
         writeFileSync(versionPath, engineVersion);
 
+
         // Update renderer versions and peer dependencies
         const updateProjectPackage = async (project) => {
             const path = join(cwd, 'packages', project, 'package.json');
             const json = await readJson(path);
             console.log(json);
+
             // Unstable packages (eg version < 1.0) are treated specially:
             // Rather than use the release version (eg 16.1.0)-
             // We just auto-increment the minor version (eg 0.1.0 -> 0.2.0).
@@ -42,11 +44,17 @@ const update = async ({
                 if (prerelease) {
                     suffix = `-${prerelease.join('.')}`;
                 }
-
                 json.version = `0.${semver.minor(json.version) + 1}.0${suffix}`;
             } else {
                 json.version = version;
             }
+            console.log(Object.keys(json.dependencies).reduce((acc, current) => {
+                const ret = { ...acc, [current]: json.dependencies[current], };
+                if (packages.some(item => item === current)) {
+                    ret[current] = version;
+                }
+                return ret;
+            }, {}));
 
             await writeJson(path, json, { spaces: 2, });
         };
