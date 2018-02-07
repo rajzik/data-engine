@@ -18,7 +18,7 @@ export default class Filter {
      *
      * @memberOf Filter
      */
-    constructor(data = null, sortEngine = null) {
+    constructor(data = [], sortEngine = null) {
         this.filtered = data;
         this.filters = {};
         this.SortEngine = sortEngine;

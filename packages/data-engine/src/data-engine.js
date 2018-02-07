@@ -25,7 +25,7 @@ class DataEngine {
      *
      * @memberOf DataEngine
      */
-    constructor(data = null, primaryKey = null, sortFunction = null) {
+    constructor(data = [], primaryKey = null, sortFunction = null) {
         this.filterEngine = new Filter(data, new Sort(data, primaryKey, sortFunction));
     }
     /**
