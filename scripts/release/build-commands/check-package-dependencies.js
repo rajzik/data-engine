@@ -20,7 +20,7 @@ const check = async ({ cwd, packages, }) => {
 
     const checkModule = (module) => {
         const rootVersion = rootPackage.devDependencies[module];
-
+        console.log(module);
         projectPackages.forEach((projectPackage) => {
             const projectVersion = projectPackage.dependencies[module];
 

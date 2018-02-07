@@ -47,7 +47,7 @@
       "bundleType": "NODE_DEV",
       "packageName": "data-filter",
       "size": 27583,
-      "gzip": 5578
+      "gzip": 5577
     },
     {
       "filename": "data-filter.production.min.js",
@@ -68,7 +68,7 @@
       "bundleType": "UMD_PROD",
       "packageName": "data-sort",
       "size": 2435,
-      "gzip": 945
+      "gzip": 944
     },
     {
       "filename": "data-sort.development.js",
