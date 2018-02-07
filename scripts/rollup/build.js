@@ -308,6 +308,7 @@ async function createBundle(bundle, bundleType) {
             bundle.moduleType,
             bundle.modulesToStub
         ),
+        external: externals,
         // We can't use getters in www.
         legacy: false,
     };

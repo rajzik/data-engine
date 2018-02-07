@@ -20,7 +20,11 @@ const bundles = [
         moduleType: 'ISOMORPHIC',
         entry: 'data-engine',
         global: 'DataEngine',
-        externals: [],
+        externals: [
+            'data-filter',
+            'data-sort',
+            'filter-value'
+        ],
     },
     /** ******* Filter component ******* */
     {
@@ -29,7 +33,10 @@ const bundles = [
         moduleType: 'ISOMORPHIC',
         entry: 'data-filter',
         global: 'Filter',
-        externals: [],
+        externals: [
+            'filter-value',
+            'data-sort'
+        ],
     },
     /** ******* Sort component ******* */
     {

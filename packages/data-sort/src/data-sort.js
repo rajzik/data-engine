@@ -10,6 +10,8 @@
  * @export
  * @class Sort
  */
+import { log } from 'shared/log';
+
 export default class Sort {
     /**
      * Creates an instance of Sort.
@@ -34,6 +36,7 @@ export default class Sort {
      * @memberOf Sort
      */
     setData = (data, shouldSort = false) => {
+        log('setData', data, 'should sort', shouldSort);
         this.data = data;
         if (shouldSort) {
             return this.sortData();
@@ -62,14 +65,17 @@ export default class Sort {
      * @memberOf Sort
      */
     setPrimaryKey = (key) => {
+        log('setPrimaryKey');
         if (this.isCustomFunction) {
             return;
         }
+        log('primaryKey Continue');
         if (typeof key === 'string' && key.length > 0) {
             this.primaryKey = key;
             if (this.currentName === null) {
                 this.currentName = key;
             }
+            log(this.currentName, this.primaryKey);
             this.sortFunc = this.defaultSortWithKey;
         }
     }
@@ -161,6 +167,7 @@ export default class Sort {
      * @memberOf Sort
      */
     sortData = () => {
+        log(this.currentName);
         if (this.currentName) {
             this.data = this.data.sort(this.sortFunc);
         }
