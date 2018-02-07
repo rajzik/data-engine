@@ -9,7 +9,6 @@ const { logPromise, } = require('../utils');
 
 const check = async ({ cwd, packages, }) => {
     const rootPackage = await readJson(join(cwd, 'package.json'));
-    console.log(packages);
     const projectPackages = [];
     for (let i = 0; i < packages.length; i++) {
         const project = packages[i];
