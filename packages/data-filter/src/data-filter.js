@@ -18,10 +18,9 @@ export default class Filter {
      *
      * @memberOf Filter
      */
-    constructor(data = null, fetchFunction = null, sortEngine = null) {
+    constructor(data = null, sortEngine = null) {
         this.Data = data;
         this.filtered = data;
-        this.FetchFunction = fetchFunction;
         this.filters = {};
         this.SortEngine = sortEngine;
     }
@@ -53,35 +52,7 @@ export default class Filter {
     get Data() {
         return this.data;
     }
-    /**
-     * Getter for fetch function
-     * @returns {function}
-     */
-    get FetchFunction() {
-        return this.fetchFunction;
-    }
-    /**
-     * Setter for fetch function
-     * @param {function} fetchFunction
-     */
-    set FetchFunction(fetchFunction) {
-        if (typeof fetchFunction === 'function') {
-            this.fetchFunction = fetchFunction;
-        }
-    }
-    /**
-     * Get data from server after filter it with our filters
-     * and return filtered data;
-     * @param {any} args - arguments passed to your function
-     */
-    async fetchData(...args) {
-        try {
-            this.Data = await this.FetchFunction(...args);
-            return this.updateFilter();
-        } catch (e) {
-            throw new Error(e);
-        }
-    }
+
     /**
      * Add or modify filter value
      *

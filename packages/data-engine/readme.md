@@ -9,7 +9,7 @@ Create new data-engine
     const engine = new DataEngine();
     const engine2 = new DataEngine(data);
     const engine3 = new DataEngine(data, 'primary key');
-    const engine4 = new DataEngine(data, 'primary key', sortFunction, fetchFunction);
+    const engine4 = new DataEngine(data, 'primary key', sortFunction);
 ```
 
 Set data 

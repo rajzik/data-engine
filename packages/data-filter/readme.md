@@ -3,12 +3,8 @@
 Creating new filter
 ``` javascript
 const filterEngine = new Filter(data);
-// with fetching from server
-const filterEngine = new Filter(data, fetchFunction);
 // with instance of sort
-const filterEngine = new Filter(data, fetchFunction, sort);
-// only with sort
-const filterEngine = new Filter(data, null, sort);
+const filterEngine = new Filter(data, sort);
 ```
 
 Updating data
@@ -39,18 +35,6 @@ Clearing filters
 Getting data
 ```javascript
     const filteredData = filterEngine.getFilteredData();
-```
-
-Setting fetch function
-Fetch function has to return data from server when called;
-it's javascript promise
-```javascript
-    filterEngine.FetchFunction = () => {};
-```
-
-Fetching data from server
-```javascript
-    const filteredData = await filterEngine.fetchData(...args);
 ```
 
 Getting sort engine from filter
