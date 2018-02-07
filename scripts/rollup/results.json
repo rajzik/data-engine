@@ -19,21 +19,21 @@
       "bundleType": "NODE_DEV",
       "packageName": "data-engine",
       "size": 29262,
-      "gzip": 5560
+      "gzip": 5561
     },
     {
       "filename": "data-engine.production.min.js",
       "bundleType": "NODE_PROD",
       "packageName": "data-engine",
       "size": 11177,
-      "gzip": 3201
+      "gzip": 3202
     },
     {
       "filename": "data-filter.development.js",
       "bundleType": "UMD_DEV",
       "packageName": "data-filter",
       "size": 25191,
-      "gzip": 4996
+      "gzip": 4998
     },
     {
       "filename": "data-filter.production.min.js",
@@ -47,49 +47,49 @@
       "bundleType": "NODE_DEV",
       "packageName": "data-filter",
       "size": 25030,
-      "gzip": 4960
+      "gzip": 4963
     },
     {
       "filename": "data-filter.production.min.js",
       "bundleType": "NODE_PROD",
       "packageName": "data-filter",
       "size": 9696,
-      "gzip": 2970
+      "gzip": 2971
     },
     {
       "filename": "data-sort.development.js",
       "bundleType": "UMD_DEV",
       "packageName": "data-sort",
       "size": 7214,
-      "gzip": 1846
+      "gzip": 1847
     },
     {
       "filename": "data-sort.production.min.js",
       "bundleType": "UMD_PROD",
       "packageName": "data-sort",
       "size": 2435,
-      "gzip": 944
+      "gzip": 945
     },
     {
       "filename": "data-sort.development.js",
       "bundleType": "NODE_DEV",
       "packageName": "data-sort",
       "size": 7055,
-      "gzip": 1811
+      "gzip": 1812
     },
     {
       "filename": "data-sort.production.min.js",
       "bundleType": "NODE_PROD",
       "packageName": "data-sort",
       "size": 2277,
-      "gzip": 891
+      "gzip": 892
     },
     {
       "filename": "filter-value.development.js",
       "bundleType": "UMD_DEV",
       "packageName": "filter-value",
       "size": 13070,
-      "gzip": 3017
+      "gzip": 3018
     },
     {
       "filename": "filter-value.production.min.js",
@@ -103,14 +103,14 @@
       "bundleType": "NODE_DEV",
       "packageName": "filter-value",
       "size": 12904,
-      "gzip": 2980
+      "gzip": 2982
     },
     {
       "filename": "filter-value.production.min.js",
       "bundleType": "NODE_PROD",
       "packageName": "filter-value",
       "size": 4202,
-      "gzip": 1544
+      "gzip": 1545
     }
   ]
 }
