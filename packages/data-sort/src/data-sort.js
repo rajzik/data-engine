@@ -22,6 +22,7 @@ export default class Sort {
      * @memberOf Sort
      */
     constructor(data = [], primaryKey = null, sortFunction = null) {
+        log('constructor');
         this.currentName = null;
         this.sortFunc = this.defaultSort;
         this.setSortFunction(sortFunction);
@@ -36,7 +37,8 @@ export default class Sort {
      * @memberOf Sort
      */
     setData = (data, shouldSort = false) => {
-        log('setData', data, 'should sort', shouldSort);
+        log('setData', 'should sort', shouldSort);
+        log(data);
         this.data = data;
         if (shouldSort) {
             return this.sortData();
@@ -50,6 +52,7 @@ export default class Sort {
      * @memberOf Sort
      */
     setSortFunction = (func) => {
+        log('setSortFunction', func);
         if (typeof func === 'function') {
             this.sortFunc = func;
             this.isCustomFunction = true;
@@ -65,7 +68,7 @@ export default class Sort {
      * @memberOf Sort
      */
     setPrimaryKey = (key) => {
-        log('setPrimaryKey');
+        log('setPrimaryKey', key);
         if (this.isCustomFunction) {
             return;
         }
@@ -75,7 +78,6 @@ export default class Sort {
             if (this.currentName === null) {
                 this.currentName = key;
             }
-            log(this.currentName, this.primaryKey);
             this.sortFunc = this.defaultSortWithKey;
         }
     }
@@ -89,6 +91,7 @@ export default class Sort {
      * @memberOf Sort
      */
     removePrimaryKey = () => {
+        log('remove primary key');
         this.primaryKey = '';
         if (!this.isCustomFunction) {
             this.sortFunc = this.defaultSort;
@@ -101,6 +104,7 @@ export default class Sort {
      * @memberOf Sort
      */
     setDefaultSort = () => {
+        log('setting default sort');
         this.isCustomFunction = false;
         this.sortFunc = this.primaryKey ? this.defaultSortWithKey : this.defaultSort;
     }
@@ -129,6 +133,7 @@ export default class Sort {
      * @memberOf Sort
      */
     sortBy = (name) => {
+        log('sorting by ', name);
         if (this.currentName === name) {
             return this.reverseData();
         }
@@ -167,7 +172,7 @@ export default class Sort {
      * @memberOf Sort
      */
     sortData = () => {
-        log(this.currentName);
+        log('sort data', this.currentName);
         if (this.currentName) {
             this.data = this.data.sort(this.sortFunc);
         }
@@ -180,6 +185,7 @@ export default class Sort {
      * @memberOf Sort
      */
     reverseData = () => {
+        log('reverse data');
         this.data = this.data.reverse();
         return this.data;
     }
