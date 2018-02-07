@@ -22,9 +22,9 @@ export default class Sort {
     constructor(data = [], primaryKey = null, sortFunction = null) {
         this.currentName = null;
         this.sortFunc = this.defaultSort;
-        this.setPrimaryKey(primaryKey);
         this.setSortFunction(sortFunction);
-        this.setData(data);
+        this.setPrimaryKey(primaryKey);
+        this.setData(data, true);
     }
     /**
      * Update data, refresh old data with new.
@@ -33,12 +33,12 @@ export default class Sort {
      * @param {boolean} shouldSort should be resorted
      * @memberOf Sort
      */
-    setData = (data, shouldSort = true) => {
+    setData = (data, shouldSort = false) => {
         this.data = data;
         if (shouldSort) {
             return this.sortData();
         }
-        return data;
+        return this.data;
     }
     /**
      * Setter for custom function
@@ -62,8 +62,7 @@ export default class Sort {
      * @memberOf Sort
      */
     setPrimaryKey = (key) => {
-        if (!this.isCustomFunction) {
-            this.sortFunc = this.defaultSortWithKey;
+        if (this.isCustomFunction) {
             return;
         }
         if (typeof key === 'string' && key.length > 0) {
@@ -71,6 +70,7 @@ export default class Sort {
             if (this.currentName === null) {
                 this.currentName = key;
             }
+            this.sortFunc = this.defaultSortWithKey;
         }
     }
     set PrimaryKey(key) {
@@ -162,7 +162,7 @@ export default class Sort {
      */
     sortData = () => {
         if (this.currentName) {
-            return this.data.sort(this.sortFunc);
+            this.data = this.data.sort(this.sortFunc);
         }
         return this.data;
     }
@@ -172,7 +172,10 @@ export default class Sort {
      * @return {Array} reversed data
      * @memberOf Sort
      */
-    reverseData = () => this.data.reverse();
+    reverseData = () => {
+        this.data = this.data.reverse();
+        return this.data;
+    }
     /**
      * Getter for data
      *
