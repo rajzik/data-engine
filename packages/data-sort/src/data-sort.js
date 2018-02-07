@@ -27,7 +27,7 @@ export default class Sort {
         this.sortFunc = this.defaultSort;
         this.setSortFunction(sortFunction);
         this.setPrimaryKey(primaryKey);
-        this.setData(data, true);
+        this.setData(data);
     }
     /**
      * Update data, refresh old data with new.
@@ -36,7 +36,7 @@ export default class Sort {
      * @param {boolean} shouldSort should be resorted
      * @memberOf Sort
      */
-    setData = (data, shouldSort = false) => {
+    setData = (data, shouldSort = true) => {
         log('setData', 'should sort', shouldSort);
         log(data);
         this.data = data;
@@ -78,7 +78,7 @@ export default class Sort {
             if (this.currentName === null) {
                 this.currentName = key;
             }
-            this.sortFunc = this.defaultSortWithKey;
+            this.setSortFunction();
         }
     }
     set PrimaryKey(key) {
@@ -94,7 +94,7 @@ export default class Sort {
         log('remove primary key');
         this.primaryKey = '';
         if (!this.isCustomFunction) {
-            this.sortFunc = this.defaultSort;
+            this.setSortFunction();
         }
     }
     /**
@@ -106,7 +106,7 @@ export default class Sort {
     setDefaultSort = () => {
         log('setting default sort');
         this.isCustomFunction = false;
-        this.sortFunc = this.primaryKey ? this.defaultSortWithKey : this.defaultSort;
+        this.setSortFunction();
     }
     /**
      * Compare primary key
@@ -137,9 +137,24 @@ export default class Sort {
         if (this.currentName === name) {
             return this.reverseData();
         }
+        this.setSortFunction();
         this.currentName = name;
         return this.sortData();
     };
+    /**
+     * Setting right function for sort,
+     *
+     */
+    setSortFunction = () => {
+        if (this.isCustomFunction) {
+            return;
+        }
+        if (this.currentName === this.primaryKey) {
+            this.sortFunc = this.defaultSort;
+        } else {
+            this.sortFunc = this.defaultSortWithKey;
+        }
+    }
     /**
      * default sort with key
      * Default sorting function when user won't add own function.
