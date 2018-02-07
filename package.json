@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "data-engine",
-  "version": "2.0.0-rc.11",
+  "version": "2.0.0-rc.12",
   "description": "Data processing, filter and sort",
   "main": "webpack.config.babel.js",
   "scripts": {
