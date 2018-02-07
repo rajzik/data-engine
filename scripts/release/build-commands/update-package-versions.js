@@ -47,7 +47,6 @@ const update = async ({
             } else {
                 json.version = version;
             }
-            console.log(json.dependencies);
             json.dependencies = Object.keys(json.dependencies).reduce((acc, current) => {
                 const ret = { ...acc, [current]: json.dependencies[current], };
                 if (packages.some(item => item === current)) {
@@ -55,7 +54,6 @@ const update = async ({
                 }
                 return ret;
             }, {});
-            console.log(json.dependencies);
             await writeJson(path, json, { spaces: 2, });
         };
         await Promise.all(packages.map(updateProjectPackage));
