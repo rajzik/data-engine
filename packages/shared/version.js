@@ -1,2 +1,2 @@
 
-module.exports = '2.0.0-rc.13';
+module.exports = '2.0.0';
