@@ -1,7 +1,7 @@
 {
   "name": "data-filter",
   "description": "Data engine is small data management lib for some sort and filter.",
-  "version": "2.0.2-rc.4",
+  "version": "2.0.2-rc.5",
   "keywords": [
     "Data",
     "Sort",
@@ -46,8 +46,8 @@
   },
   "dependencies": {
     "loose-envify": "^1.1.0",
-    "filter-value": "^2.0.2-rc.4",
-    "data-sort": "^2.0.2-rc.4"
+    "filter-value": "^2.0.2-rc.5",
+    "data-sort": "^2.0.2-rc.5"
   },
   "browserify": {
     "transform": [
