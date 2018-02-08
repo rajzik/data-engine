@@ -1,7 +1,6 @@
 /**
  * @providesModule FilterValue
  */
-import { log } from 'shared';
 
 import './update-prototype';
 import regexEscape from './regex-escape';
