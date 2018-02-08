@@ -1,6 +1,7 @@
 /**
  * @providesModule FilterValue
  */
+import { log } from 'shared';
 
 import './update-prototype';
 import regexEscape from './regex-escape';
@@ -20,16 +21,15 @@ export default class FilterValue {
      * @param {any} type - type of item
      * @memberOf FilterValue
      */
-    constructor(name = null, item = null, type = null) {
+    constructor(name = null, item = undefined, type = undefined) {
         this.originaItem = null;
         this.Name = name;
-        if (type !== null) {
+        if (type !== undefined) {
             this.Type = type;
         }
-        if (item === null) {
-            return;
+        if (item !== undefined) {
+            this.Value = item;
         }
-        this.Value = item;
     }
     /**
      * Preparing item for right validation.
