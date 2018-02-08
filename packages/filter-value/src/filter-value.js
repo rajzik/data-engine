@@ -5,7 +5,7 @@
 import './update-prototype';
 import regexEscape from './regex-escape';
 
-const staticTypes = ['number', 'string', 'regexp', 'boolean'];
+const staticTypes = ['number', 'string', 'boolean'];
 
 // TODO: check static types
 
