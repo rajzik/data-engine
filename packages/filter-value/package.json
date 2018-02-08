@@ -1,7 +1,7 @@
 {
   "name": "filter-value",
   "description": "Data engine is small data management lib for some sort and filter.",
-  "version": "2.0.1",
+  "version": "2.0.2-rc.1",
   "keywords": [
     "Data",
     "Sort",
