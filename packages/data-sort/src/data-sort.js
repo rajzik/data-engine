@@ -85,9 +85,7 @@ export default class Sort {
      */
     removePrimaryKey = () => {
         this.primaryKey = '';
-        if (!this.isCustomFunction) {
-            this.setSortFunction();
-        }
+        this.setSortFunction();
     }
     /**
      * Setup default sort function
@@ -141,13 +139,14 @@ export default class Sort {
      *
      */
     setSortFunction = () => {
-        if (this.isCustomFunction) {
+        const { isCustomFunction, primaryKey, currentName, } = this;
+        if (isCustomFunction) {
             return;
         }
-        if (this.currentName === this.primaryKey) {
-            this.sortFunc = this.defaultSort;
-        } else {
+        if (primaryKey && primaryKey !== currentName) {
             this.sortFunc = this.defaultSortWithKey;
+        } else {
+            this.sortFunc = this.defaultSort;
         }
     }
     /**
