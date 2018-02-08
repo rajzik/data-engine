@@ -19,7 +19,7 @@
       "bundleType": "NODE_DEV",
       "packageName": "data-engine",
       "size": 5427,
-      "gzip": 1590
+      "gzip": 1591
     },
     {
       "filename": "data-engine.production.min.js",
@@ -61,7 +61,7 @@
       "bundleType": "UMD_DEV",
       "packageName": "data-sort",
       "size": 7965,
-      "gzip": 1973
+      "gzip": 1974
     },
     {
       "filename": "data-sort.production.min.js",
@@ -82,7 +82,7 @@
       "bundleType": "NODE_PROD",
       "packageName": "data-sort",
       "size": 2502,
-      "gzip": 961
+      "gzip": 962
     },
     {
       "filename": "filter-value.development.js",
