@@ -189,6 +189,7 @@ export default class FilterValue {
         boolean: this.basicCompare,
         string: this.basicCompare,
         number: this.basicCompare,
+        null: this.basicCompare,
         date: this.dateCompare,
         array: this.arrayCompare,
         regexp: this.regexpCompare,
