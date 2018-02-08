@@ -257,7 +257,9 @@ export default class FilterValue {
                 type = 'func';
                 break;
             case 'object':
-                if (Array.isArray(item)) {
+                if (item === null) {
+                    type = 'null';
+                } else if (Array.isArray(item)) {
                     type = 'array';
                 } else if (item instanceof RegExp) {
                     type = 'regexp';
