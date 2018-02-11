@@ -10,7 +10,7 @@ describe('FilterValue', () => {
         console.log(FilterValue);
         let testValue = new FilterValue();
         expect(testValue).toBeInstanceOf(FilterValue);
-
+        
     });
 
 });
