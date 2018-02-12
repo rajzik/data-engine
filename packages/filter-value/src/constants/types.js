@@ -7,7 +7,7 @@ import {
     rangeCompare
 } from '../comparers';
 
-import { numberRetype, stringRetype, booleanRetype } from '../retype';
+import { numberRetype, stringRetype, booleanRetype, regexpRetype, dateRetype } from '../retype';
 
 
 const number = 'number';
@@ -48,6 +48,8 @@ const retype = {
     number: numberRetype,
     string: stringRetype,
     boolean: booleanRetype,
+    regexp: regexpRetype,
+    date: dateRetype,
 };
 
 export {

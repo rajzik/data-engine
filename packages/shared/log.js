@@ -9,8 +9,8 @@ function warnFunction() {
 }
 
 function errorFunction() {
-    console.trace();
-    console.error(...arguments);
+    const { stack, } = new Error();
+    console.error(stack, '\n', ...arguments);
 }
 
 function noop() {};

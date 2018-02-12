@@ -6,6 +6,7 @@
 import Filter from 'data-filter';
 import Sort from 'data-sort';
 import FilterValue from 'filter-value';
+
 /**
  * Data engine providing sort and filter functionality
  *
@@ -118,7 +119,7 @@ class DataEngine {
         return this.getData();
     }
 }
-
+const { regexEscape, } = FilterValue;
 
 export default DataEngine;
-export { FilterValue, Filter, Sort };
+export { FilterValue, Filter, Sort, regexEscape };

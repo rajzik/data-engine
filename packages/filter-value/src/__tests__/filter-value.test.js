@@ -1,5 +1,8 @@
 /* eslint-disable */
 
+const name = 'Name';
+const newName = 'New Name';
+
 describe('FilterValue', () => {
     let FilterValue;
     beforeEach(() => {
@@ -8,19 +11,43 @@ describe('FilterValue', () => {
     });
     it('Create FilterValue object', () => {
         let testValue = new FilterValue();
-        expect(testValue).toBeInstanceOf(FilterValue);        
+        expect(testValue).toBeInstanceOf(FilterValue);
     });
     it('Create FilterValue with name', () => {
-        let testValue = new FilterValue('Name');
-        expect(testValue.Name).toBe('Name'); 
+        let testValue = new FilterValue(name);
+        expect(testValue.Name).toBe(name); 
+        testValue.Name = newName;
+        expect(testValue.Name).toBe(newName);
     });
     it('Create FilterValue with value', () => {
         let testValue = new FilterValue(null, 'Test');
         expect(testValue.Value).toBe('Test'); 
+        testValue.Value = 4;
+        expect(testValue.Value).toBe(4);
+        testValue.Value = /test/;
+        expect(testValue.Value).toBeInstanceOf(RegExp); 
     });
     it('Create FilterValue with Type', () => {
+        const retype = [
+            'number',
+            'string',
+            'boolean',
+            'regexp',
+            'date'
+        ];
         let testValue = new FilterValue(null, undefined, 'string');
-        expect(testValue.Type).toBe('string');
+        retype.forEach((item) => {
+            testValue.Type = item;
+            expect(testValue.Type).toBe(item);        
+        });
+        testValue.removeType();
+        expect(testValue.Type).toBe(null);
     });
+    it('should throw on type error', () => {
+        let testValue = new FilterValue();        
+        expect(() => { 
+            testValue.Type = 'Not work';
+        }).toThrow();
+    })
     
 });

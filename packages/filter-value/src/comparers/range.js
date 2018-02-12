@@ -6,8 +6,8 @@
  * @memberOf FilterValue
  */
 const rangeCompare = item => toCompare =>
-    item.from.$.isLess(toCompare) &&
-    item.to.$.isGreater(toCompare);
+    item.from.isLess(toCompare) &&
+    item.to.isGreater(toCompare);
 
 export default rangeCompare;
 

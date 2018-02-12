@@ -5,14 +5,14 @@
 import { error, warn } from 'shared/log';
 
 import './update-prototype';
-import regexEscape from './regex-escape';
+import regexpEscape from './regex-escape';
 
 import { types, retype } from './constants/types';
-import { checkRangeAbleTypes, validStaticType } from './helpers';
+import { checkRangeAbleTypes, validStaticType, checkPrimitiveType } from './helpers';
 
 
-export default class FilterValue {
-    static regexEscape = regexEscape;
+class FilterValue {
+    static regexpEscape = regexpEscape;
     staticType = null;
     /**
      * Creates an instance of FilterValue.
@@ -65,9 +65,7 @@ export default class FilterValue {
     set Name(name) {
         if (typeof name === 'string') {
             this.name = name;
-            return;
         }
-        error(`${name} is not string - cannot set name`);
     }
     /**
      * Getter for name
@@ -79,7 +77,6 @@ export default class FilterValue {
     get Name() {
         return this.name;
     }
-
     /**
      * Setter for type
      *
@@ -94,6 +91,7 @@ export default class FilterValue {
         }
         this.staticType = null;
         error(`${type} is not supported. Cannot set static type`);
+        throw new TypeError(`${type} is not supported`);
     }
     /**
      * Getter for type
@@ -113,7 +111,6 @@ export default class FilterValue {
     removeType = () => {
         this.staticType = null;
     }
-
     /** Setter for new value
      * Update filter value
      *
@@ -139,7 +136,6 @@ export default class FilterValue {
     get Value() {
         return this.originalItem;
     }
-
     /**
      * Applying filter to item which will return true/false. True when it should be ignored.
      *
@@ -147,8 +143,6 @@ export default class FilterValue {
      * @memberOf FilterValue
      */
     compare = toCompare => this.compareFunc(toCompare);
-
-
     /**
      * Checking validity of supported types
      * valid types are
@@ -159,7 +153,7 @@ export default class FilterValue {
      * @memberOf FilterValue
      */
     checkValidity = (item) => {
-        const type = this.checkPrimitiveType(item);
+        const type = checkPrimitiveType(item);
         if (type) {
             return type;
         }
@@ -179,4 +173,4 @@ export default class FilterValue {
         return null;
     }
 }
-
+export default FilterValue;

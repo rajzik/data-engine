@@ -30,6 +30,9 @@
             "functions": "never"
         }],
         "global-require": "off",
-        "import/no-unresolved": "off"
+        "import/no-unresolved": "off",
+        "import/extensions": "off",
+        "import/no-extraneous-dependencies": "off",
+        "no-extend-native": "off"
     }
 }
