@@ -4,7 +4,6 @@
 // eslint-disable-next-line
 import { error, warn } from 'shared/log';
 
-import './update-prototype';
 import regexpEscape from './regex-escape';
 
 import { types, retype } from './constants/types';
@@ -127,6 +126,7 @@ class FilterValue {
         } else {
             error(`${item} is not supported. Use custom function!`);
             warn('Possible types are Date, string, RegExp, number, function, Array<string, RegExp, number, null, function>. Array can have mixed values.');
+            throw new TypeError(`${item} is not supported.`);
         }
     }
     /**

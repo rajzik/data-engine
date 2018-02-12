@@ -1,8 +1,5 @@
 /* eslint-disable */
 
-const name = 'Name';
-const newName = 'New Name';
-
 describe('FilterValue', () => {
     let FilterValue;
     beforeEach(() => {
@@ -13,7 +10,10 @@ describe('FilterValue', () => {
         let testValue = new FilterValue();
         expect(testValue).toBeInstanceOf(FilterValue);
     });
-    it('Create FilterValue with name', () => {
+    it('Create FilterValue with name', () => {        
+        const name = 'Name';
+        const newName = 'New Name';
+
         let testValue = new FilterValue(name);
         expect(testValue.Name).toBe(name); 
         testValue.Name = newName;
@@ -26,6 +26,12 @@ describe('FilterValue', () => {
         expect(testValue.Value).toBe(4);
         testValue.Value = /test/;
         expect(testValue.Value).toBeInstanceOf(RegExp); 
+    });
+    it('Should throw type error', () => {
+        let testValue = new FilterValue('test');
+        expect(() => {
+            testValue.Value = [[]];
+        }).toThrow();
     });
     it('Create FilterValue with Type', () => {
         const retype = [
