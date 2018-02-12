@@ -1,23 +1,31 @@
 /* eslint-disable */
 
-function logf() {
+function logFunction() {
     console.log(...arguments);
 }
 
-function warnf() {
+function warnFunction() {
     console.warn(...arguments);
+}
+
+function errorFunction() {
+    console.trace();
+    console.error(...arguments);
 }
 
 function noop() {};
 
 let log = noop;
 let warn = noop;
+let error = errorFunction;
+
 if (__DEV__) {
-    log = logf;
-    warn = warnf;
+    log = logFunction;
+    warn = warnFunction;
 }
 
 export {
     log,
-    warn
+    warn,
+    error
 }
