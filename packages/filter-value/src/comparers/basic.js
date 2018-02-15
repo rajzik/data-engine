@@ -7,4 +7,7 @@
  */
 const basicCompare = item => toCompare => item === toCompare;
 
+const basicCompareWithType = type => item => toCompare => type(toCompare) === item;
+
 export default basicCompare;
+export { basicCompareWithType };

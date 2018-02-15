@@ -6,13 +6,14 @@ import { error, warn } from 'shared/log';
 
 import regexpEscape from './regex-escape';
 
-import { types, retype } from './constants/types';
+import { types, typesWithRetype, retype } from './constants/types';
 import { checkRangeAbleTypes, validStaticType, checkPrimitiveType } from './helpers';
 
 
 class FilterValue {
     static regexpEscape = regexpEscape;
     staticType = null;
+    types = types;
     /**
      * Creates an instance of FilterValue.
      * string, number, regexp, function, array of items mentioned before
@@ -86,9 +87,10 @@ class FilterValue {
     set Type(type) {
         if (validStaticType(type)) {
             this.staticType = type;
+            this.types = typesWithRetype;
             return;
         }
-        this.staticType = null;
+        this.removeType();
         error(`${type} is not supported. Cannot set static type`);
         throw new TypeError(`${type} is not supported`);
     }
@@ -108,6 +110,7 @@ class FilterValue {
      * @memberOf FilterValue
      */
     removeType = () => {
+        this.types = types;
         this.staticType = null;
     }
     /** Setter for new value
@@ -122,7 +125,7 @@ class FilterValue {
 
         if (this.type) {
             this.item = this.prepareItem(item);
-            this.compareFunc = types[this.type](this.item);
+            this.compareFunc = this.types[this.type](this.item);
         } else {
             error(`${item} is not supported. Use custom function!`);
             warn('Possible types are Date, string, RegExp, number, function, Array<string, RegExp, number, null, function>. Array can have mixed values.');

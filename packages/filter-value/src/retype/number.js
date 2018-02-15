@@ -8,6 +8,7 @@ import { error } from 'shared/log';
  * @memberOf FilterValue
  */
 const numberRetype = (item) => {
+    if (typeof item === 'number') return item;
     try {
         return parseFloat(item);
     } catch (e) {

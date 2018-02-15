@@ -2,12 +2,20 @@ import {
     regexpCompare,
     arrayCompare,
     basicCompare,
+    basicCompareWithType,
     dateCompare,
+    dateCompareWithType,
     funcCompare,
     rangeCompare
 } from '../comparers';
 
-import { numberRetype, stringRetype, booleanRetype, regexpRetype, dateRetype } from '../retype';
+import {
+    numberRetype,
+    stringRetype,
+    booleanRetype,
+    regexpRetype,
+    dateRetype
+} from '../retype';
 
 
 const number = 'number';
@@ -29,7 +37,6 @@ const primitiveTypes = {
  * Basic types of testable items.
  * Enum for data types
  *
- * @memberOf FilterValue
  */
 
 const types = {
@@ -38,6 +45,18 @@ const types = {
     number: basicCompare,
     null: basicCompare,
     date: dateCompare,
+    array: arrayCompare,
+    regexp: regexpCompare,
+    function: funcCompare,
+    range: rangeCompare,
+};
+
+const typesWithRetype = {
+    boolean: basicCompare,
+    string: basicCompareWithType(stringRetype),
+    number: basicCompareWithType(numberRetype),
+    null: basicCompare,
+    date: dateCompareWithType(dateRetype),
     array: arrayCompare,
     regexp: regexpCompare,
     function: funcCompare,
@@ -55,6 +74,7 @@ const retype = {
 export {
     staticTypes,
     primitiveTypes,
+    typesWithRetype,
     types,
     retype
 };

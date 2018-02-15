@@ -17,5 +17,12 @@ const rangeCompare = (item) => {
     if (typeof item.from !== 'object') return toCompare => isBetween(item.from, item.to, toCompare);
     return toCompare => isTimeBetween(item.from, item.to, toCompare);
 };
+
+const rangeCompareWithType = type => (item) => {
+    if (typeof item.from !== 'object') return toCompare => isBetween(item.from, item.to, type(toCompare));
+    return toCompare => isTimeBetween(item.from, item.to, type(toCompare));
+};
+
 export default rangeCompare;
 
+export { rangeCompareWithType };
