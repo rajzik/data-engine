@@ -31,8 +31,10 @@ export default class Filter {
      * @memberOf Filter
      */
     setData = (data) => {
-        this.data = data;
-        return this.updateFilter();
+        if (Array.isArray(data)) {
+            this.data = data;
+            this.updateFilter();
+        }
     }
     /**
      * Setter for data
