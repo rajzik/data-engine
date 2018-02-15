@@ -27,8 +27,6 @@ packages.forEach((name) => {
 module.exports = Object.assign({}, sourceConfig, {
     // Redirect imports to the compiled bundles
     moduleNameMapper,
-    // Don't run bundle tests on blacklisted -test.internal.* files
-    testPathIgnorePatterns: ['/node_modules/', '-test.internal.js$'],
     // Exclude the build output from transforms
     transformIgnorePatterns: ['/node_modules/', '<rootDir>/build/'],
 });

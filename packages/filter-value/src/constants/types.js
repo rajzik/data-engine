@@ -14,9 +14,18 @@ const number = 'number';
 const string = 'string';
 const boolean = 'boolean';
 const fce = 'function';
+const regexp = 'regexp';
+const date = 'date';
 
+const staticTypes = [number, string, boolean, regexp, date];
 
-const staticTypes = [number, string, boolean, 'regexp', 'date'];
+const staticTypesEnum = {
+    number,
+    string,
+    boolean,
+    regexp,
+    date,
+};
 
 const primitiveTypes = {
     number,
@@ -55,6 +64,7 @@ const retype = {
 export {
     staticTypes,
     primitiveTypes,
+    staticTypesEnum,
     types,
     retype
 };

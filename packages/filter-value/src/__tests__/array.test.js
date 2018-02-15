@@ -42,10 +42,20 @@ describe('FilterValue array test', () => {
         const a = new FilterValue('test', array);
         expect(a.compare('a')).toBe(true);                
     });
-    it('Function array should return true', () => {
+    it('Function array should return false', () => {
         const array = [a => a === 'a', a => a === 'b'];
         const a = new FilterValue('test', array);
         expect(a.compare('c')).toBe(false);                
     });
-    
+    it('Mixed array should return true', () => {
+        const array = ['a', 4];
+        const a = new FilterValue('test', array);
+        expect(a.compare(4)).toBe(true);                
+    });
+
+    it('Mixed array should return false', () => {
+        const array = ['a', 4];
+        const a = new FilterValue('test', array);
+        expect(a.compare(new Date())).toBe(false);                
+    });
 });

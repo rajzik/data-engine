@@ -49,9 +49,6 @@ class FilterValue {
             }
             return item.map(value => new FilterValue(item.Name, value));
         default:
-            if (this.staticType) {
-                return retype[this.staticType](item);
-            }
             return item;
         }
     }
@@ -118,10 +115,19 @@ class FilterValue {
      */
     set Value(item) {
         this.originalItem = item;
-        this.type = this.checkValidity(item);
+        let newItem = item;
+        if (this.staticType) {
+            try {
+                newItem = retype[this.staticType](item);
+            } catch (e) {
+                error(e);
+                throw new Error(`${item} cannot by typed to ${this.staticType}`);
+            }
+        }
+        this.type = this.checkValidity(newItem);
 
         if (this.type) {
-            this.item = this.prepareItem(item);
+            this.item = this.prepareItem(newItem);
             this.compareFunc = types[this.type](this.item);
         } else {
             error(`${item} is not supported. Use custom function!`);

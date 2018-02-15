@@ -27,12 +27,7 @@ describe('FilterValue', () => {
         testValue.Value = /test/;
         expect(testValue.Value).toBeInstanceOf(RegExp); 
     });
-    it('Should throw type error', () => {
-        let testValue = new FilterValue('test');
-        expect(() => {
-            testValue.Value = [[]];
-        }).toThrow();
-    });
+    
     it('Create FilterValue with Type', () => {
         const retype = [
             'number',
@@ -49,11 +44,6 @@ describe('FilterValue', () => {
         testValue.removeType();
         expect(testValue.Type).toBe(null);
     });
-    it('should throw on type error', () => {
-        let testValue = new FilterValue();        
-        expect(() => { 
-            testValue.Type = 'Not work';
-        }).toThrow();
-    })
+
     
 });
