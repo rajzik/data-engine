@@ -125,7 +125,6 @@ class FilterValue {
             }
         }
         this.type = this.checkValidity(newItem);
-
         if (this.type) {
             this.item = this.prepareItem(newItem);
             this.compareFunc = types[this.type](this.item);
@@ -140,6 +139,13 @@ class FilterValue {
      * @returns {any} original item
      */
     get Value() {
+        return this.item;
+    }
+    /**
+     * Getter for original value passed to setter
+     * @returns {any} value set by user
+     */
+    get original() {
         return this.originalItem;
     }
     /**
@@ -169,6 +175,8 @@ class FilterValue {
             return 'array';
         } else if (item instanceof RegExp) {
             return 'regexp';
+        } else if (item instanceof Date) {
+            return 'date';
         } else if (
             item.from &&
             item.to &&

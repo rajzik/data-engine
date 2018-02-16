@@ -29,7 +29,7 @@ describe('FilterValue', () => {
         let testValue = new FilterValue();        
         testValue.Type = 'date';
         expect(() => { 
-            testValue.Value = ['ahoj'];
+            testValue.Value = ['Hello'];
         }).toThrow();
     });
 });
