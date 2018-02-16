@@ -54,7 +54,21 @@ export default class Filter {
     get Data() {
         return this.data;
     }
-
+    /**
+     * Helper function for creating new filterValue
+     * @param {string} name - name of collumn
+     * @param {any} value - value of filter
+     * @param {string} type - static type for value
+     * @returns {FilterValue} new filter value
+     */
+    createFilter = (name, value, type) => new FilterValue(name, value, type);
+    /**
+     * Simple add filter function
+     * @param {string} name - name of collumn
+     * @param {any} value - value of filter
+     * @param {string} type - static type for value
+     */
+    addFilter = (name, value, type) => this.update(this.createFilter(name, value, type))
     /**
      * Add or modify filter value
      *
