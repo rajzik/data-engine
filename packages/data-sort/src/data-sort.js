@@ -17,11 +17,13 @@ export default class Sort {
      * @param {any} data - original data
      * @param {string} [primaryKey=null] - primary key which will be fallback when keys are equals
      * @param {function} [sortFunction=null] - custom sort function
+     * @param {boolean} [direction=true] - custom sort function
      *
      * @memberOf Sort
      */
-    constructor(data = [], primaryKey = null, sortFunction = null) {
+    constructor(data = [], primaryKey = null, sortFunction = null, direction = true) {
         this.currentName = null;
+        this.direction = direction;
         this.sortFunc = this.defaultSort;
         this.setSortFunction(sortFunction);
         this.setPrimaryKey(primaryKey);
@@ -119,7 +121,8 @@ export default class Sort {
      * @return {number} position of elements
      * @memberOf Sort
      */
-    compare = (a, b) => (a[this.currentName] > b[this.currentName] ? 1 : -1);
+    // TODO: Add direction condition.
+    compare = (a, b) => ((a[this.currentName] >= b[this.currentName]) ? 1 : -1);
     /**
      * sort by name, sets new name and check if we need to only reverse
      *
