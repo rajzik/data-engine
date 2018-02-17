@@ -23,10 +23,10 @@ export default class Sort {
      */
     constructor(data = [], primaryKey = null, sortFunction = null, direction = true) {
         this.currentName = null;
-        this.direction = direction;
+        this.Direction = direction;
         this.sortFunc = this.defaultSort;
-        this.setSortFunction(sortFunction);
-        this.setPrimaryKey(primaryKey);
+        this.SortFunction = sortFunction;
+        this.PrimaryKey = primaryKey;
         this.setData(data);
     }
     /**
@@ -37,11 +37,16 @@ export default class Sort {
      * @memberOf Sort
      */
     setData = (data, shouldSort = true) => {
+        if (!Array.isArray(data)) {
+            return;
+        }
         this.data = data;
         if (shouldSort) {
-            return this.sortData();
+            this.sortData();
         }
-        return this.data;
+    }
+    set Data(data) {
+        this.setData(data);
     }
     /**
      * Setter for custom function
@@ -59,6 +64,20 @@ export default class Sort {
         this.setSortFunction(func);
     }
     /**
+     * Setter for direction
+     * @param {boolean} direction of sort
+     */
+    set Direction(direction) {
+        this.direction = !!direction;
+    }
+    /**
+     * Getter for direction
+     * @returns {boolean}
+     */
+    get Direction() {
+        return this.direction;
+    }
+    /**
      * Setter for primary key (fallback key)
      *
      * @param {string} key primary key
@@ -73,7 +92,7 @@ export default class Sort {
             if (this.currentName === null) {
                 this.currentName = key;
             }
-            this.setSortFunction();
+            this.setOwnSortFunction();
         }
     }
     set PrimaryKey(key) {
@@ -87,7 +106,7 @@ export default class Sort {
      */
     removePrimaryKey = () => {
         this.primaryKey = '';
-        this.setSortFunction();
+        this.setOwnSortFunction();
     }
     /**
      * Setup default sort function
@@ -97,7 +116,7 @@ export default class Sort {
      */
     setDefaultSort = () => {
         this.isCustomFunction = false;
-        this.setSortFunction();
+        this.setOwnSortFunction();
     }
     /**
      * Compare primary key
@@ -111,7 +130,7 @@ export default class Sort {
         const first = a[this.primaryKey];
         const second = b[this.primaryKey];
         if (first === second) return 0;
-        return (first > second ? 1 : -1);
+        return (((first > second) === this.direction) ? 1 : -1);
     }
     /**
      * Compare by current name
@@ -121,8 +140,12 @@ export default class Sort {
      * @return {number} position of elements
      * @memberOf Sort
      */
-    // TODO: Add direction condition.
-    compare = (a, b) => ((a[this.currentName] >= b[this.currentName]) ? 1 : -1);
+    compare = (a, b) => {
+        const first = a[this.currentName];
+        const second = b[this.currentName];
+        if (first === second) return 0;
+        return (((first > second) === this.direction) ? 1 : -1);
+    }
     /**
      * sort by name, sets new name and check if we need to only reverse
      *
@@ -133,15 +156,15 @@ export default class Sort {
         if (this.currentName === name) {
             return this.reverseData();
         }
-        this.setSortFunction();
         this.currentName = name;
+        this.setOwnSortFunction();
         return this.sortData();
     };
     /**
      * Setting right function for sort,
      *
      */
-    setSortFunction = () => {
+    setOwnSortFunction = () => {
         const { isCustomFunction, primaryKey, currentName, } = this;
         if (isCustomFunction) {
             return;
@@ -162,10 +185,12 @@ export default class Sort {
      * @memberOf Sort
      */
     defaultSortWithKey = (a, b) => {
-        if (a[this.currentName] === b[this.currentName]) {
+        const first = a[this.currentName];
+        const second = b[this.currentName];
+        if (first === second) {
             return this.comparePrimaryKey(a, b);
         }
-        return this.compare(a, b);
+        return (((first > second) === this.direction) ? 1 : -1);
     }
     /**
      * default sort
@@ -206,4 +231,7 @@ export default class Sort {
      * @memberOf Sort
      */
     getData = () => this.data;
+    get Data() {
+        return this.getData();
+    }
 }
