@@ -7,7 +7,13 @@ import {
     rangeCompare
 } from '../comparers';
 
-import { numberRetype, stringRetype, booleanRetype, regexpRetype, dateRetype } from '../retype';
+import {
+    numberRetype,
+    stringRetype,
+    booleanRetype,
+    regexpRetype,
+    dateRetype
+} from '../retype';
 
 
 const number = 'number';
@@ -37,8 +43,6 @@ const primitiveTypes = {
 /**
  * Basic types of testable items.
  * Enum for data types
- *
- * @memberOf FilterValue
  */
 
 const types = {

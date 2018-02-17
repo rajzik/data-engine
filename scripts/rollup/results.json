@@ -4,15 +4,15 @@
       "filename": "data-engine.development.js",
       "bundleType": "UMD_DEV",
       "packageName": "data-engine",
-      "size": 30986,
-      "gzip": 5896
+      "size": 33703,
+      "gzip": 6271
     },
     {
       "filename": "data-engine.production.min.js",
       "bundleType": "UMD_PROD",
       "packageName": "data-engine",
-      "size": 12244,
-      "gzip": 3354
+      "size": 12967,
+      "gzip": 3541
     },
     {
       "filename": "data-engine.development.js",
@@ -32,85 +32,85 @@
       "filename": "data-filter.development.js",
       "bundleType": "UMD_DEV",
       "packageName": "data-filter",
-      "size": 25996,
-      "gzip": 5262
+      "size": 28713,
+      "gzip": 5625
     },
     {
       "filename": "data-filter.production.min.js",
       "bundleType": "UMD_PROD",
       "packageName": "data-filter",
-      "size": 10418,
-      "gzip": 3119
+      "size": 11142,
+      "gzip": 3265
     },
     {
       "filename": "data-filter.development.js",
       "bundleType": "NODE_DEV",
       "packageName": "data-filter",
-      "size": 7373,
-      "gzip": 1931
+      "size": 7984,
+      "gzip": 2017
     },
     {
       "filename": "data-filter.production.min.js",
       "bundleType": "NODE_PROD",
       "packageName": "data-filter",
-      "size": 4411,
-      "gzip": 1632
+      "size": 4458,
+      "gzip": 1636
     },
     {
       "filename": "data-sort.development.js",
       "bundleType": "UMD_DEV",
       "packageName": "data-sort",
-      "size": 7874,
-      "gzip": 1951
+      "size": 8933,
+      "gzip": 2075
     },
     {
       "filename": "data-sort.production.min.js",
       "bundleType": "UMD_PROD",
       "packageName": "data-sort",
-      "size": 2666,
-      "gzip": 1011
+      "size": 2998,
+      "gzip": 1107
     },
     {
       "filename": "data-sort.development.js",
       "bundleType": "NODE_DEV",
       "packageName": "data-sort",
-      "size": 7715,
-      "gzip": 1917
+      "size": 8774,
+      "gzip": 2036
     },
     {
       "filename": "data-sort.production.min.js",
       "bundleType": "NODE_PROD",
       "packageName": "data-sort",
-      "size": 2508,
-      "gzip": 965
+      "size": 2841,
+      "gzip": 1062
     },
     {
       "filename": "filter-value.development.js",
       "bundleType": "UMD_DEV",
       "packageName": "filter-value",
-      "size": 11676,
-      "gzip": 3118
+      "size": 12721,
+      "gzip": 3302
     },
     {
       "filename": "filter-value.production.min.js",
       "bundleType": "UMD_PROD",
       "packageName": "filter-value",
-      "size": 3834,
-      "gzip": 1544
+      "size": 4178,
+      "gzip": 1644
     },
     {
       "filename": "filter-value.development.js",
       "bundleType": "NODE_DEV",
       "packageName": "filter-value",
-      "size": 11510,
-      "gzip": 3084
+      "size": 12555,
+      "gzip": 3267
     },
     {
       "filename": "filter-value.production.min.js",
       "bundleType": "NODE_PROD",
       "packageName": "filter-value",
-      "size": 3670,
-      "gzip": 1504
+      "size": 4014,
+      "gzip": 1599
     }
   ]
 }

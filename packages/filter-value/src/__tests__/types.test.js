@@ -30,4 +30,32 @@ describe('FilterValue array test', () => {
         testValue.Value = val;
         expect(testValue.Value).toBe(('' + val));
     });
+
+    it('Should change to Regexp', () => {
+        let testValue = new FilterValue();
+        testValue.Type = 'regexp';
+        let val = false;
+        testValue.Value = val;
+        expect(testValue.Value).toEqual(new RegExp(val, 'i'));
+        val = 'test';
+        testValue.Value = val;
+        expect(testValue.Value).toEqual(new RegExp(val, 'i'));
+    });
+    it('Should change to boolean', () => {
+        let testValue = new FilterValue();
+        testValue.Type = 'boolean';
+        let val = false;
+        testValue.Value = val;
+        expect(testValue.Value).toEqual(val);
+        val = 'test';
+        testValue.Value = val;
+        expect(testValue.Value).toEqual(true);
+        val = '';
+        testValue.Value = val;
+        expect(testValue.Value).toEqual(false);
+        val = undefined;
+        testValue.Value = val;
+        expect(testValue.Value).toEqual(false);
+    });
+    
 });

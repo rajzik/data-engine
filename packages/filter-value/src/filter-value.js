@@ -3,10 +3,11 @@
  */
 // eslint-disable-next-line
 import { error, warn } from 'shared/log';
+import { types, retype } from 'shared/constants/types';
 
-import regexpEscape from './regex-escape';
+import regexpEscape from 'shared/regex-escape';
 
-import { types, retype } from './constants/types';
+// import { types, retype } from './constants/types';
 import { checkRangeAbleTypes, validStaticType, checkPrimitiveType } from './helpers';
 
 
@@ -86,8 +87,7 @@ class FilterValue {
             return;
         }
         this.staticType = null;
-        error(`${type} is not supported. Cannot set static type`);
-        throw new TypeError(`${type} is not supported`);
+        throw new TypeError(`${type} is not supported. Cannot set static type`);
     }
     /**
      * Getter for type
@@ -97,6 +97,13 @@ class FilterValue {
      */
     get Type() {
         return this.staticType;
+    }
+    /**
+     * getter for internal type
+     * @returns {string} type
+     */
+    get InternalType() {
+        return this.type;
     }
     /**
      * Remove static Type
@@ -121,7 +128,7 @@ class FilterValue {
                 newItem = retype[this.staticType](item);
             } catch (e) {
                 error(e);
-                throw new Error(`${item} cannot by typed to ${this.staticType}`);
+                throw new TypeError(`${item} cannot by typed to ${this.staticType}`);
             }
         }
         this.type = this.checkValidity(newItem);
@@ -129,9 +136,8 @@ class FilterValue {
             this.item = this.prepareItem(newItem);
             this.compareFunc = types[this.type](this.item);
         } else {
-            error(`${item} is not supported. Use custom function!`);
             warn('Possible types are Date, string, RegExp, number, function, Array<string, RegExp, number, null, function>. Array can have mixed values.');
-            throw new TypeError(`${item} is not supported.`);
+            throw new TypeError(`${item} is not supported. Use custom function!`);
         }
     }
     /**

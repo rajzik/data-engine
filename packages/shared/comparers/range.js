@@ -3,9 +3,12 @@ function isBetween(fromRange, toRange, toCompare) {
 }
 
 function isTimeBetween(fromRange, toRange, toCompare) {
-    return !!toCompare.getTime &&
-        fromRange.getTime() <= toCompare.getTime() &&
-        toRange.getTime() >= toCompare.getTime();
+    let compareDate = toCompare;
+    if (!toCompare.getTime) {
+        compareDate = new Date(toCompare);
+    }
+    return fromRange.getTime() <= compareDate.getTime() &&
+        toRange.getTime() >= compareDate.getTime();
 }
 /**
  * Compares range
@@ -17,5 +20,6 @@ const rangeCompare = (item) => {
     if (typeof item.from !== 'object') return toCompare => isBetween(item.from, item.to, toCompare);
     return toCompare => isTimeBetween(item.from, item.to, toCompare);
 };
+
 export default rangeCompare;
 

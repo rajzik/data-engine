@@ -1,4 +1,4 @@
-import { primitiveTypes, staticTypes } from '../constants/types';
+import { primitiveTypes, staticTypes } from 'shared/constants/types';
 
 /**
  * Checking for primitive types detectable with typeof
