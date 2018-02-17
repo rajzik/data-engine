@@ -117,7 +117,7 @@ export default class Filter {
      */
     clearFilters = () => {
         this.filters = {};
-        this.filtered = this.data;
+        this.filtered = this.updateFce(this.data);
         return this.getFilteredData();
     }
     /**
@@ -127,10 +127,7 @@ export default class Filter {
      * @memberOf Filter
      */
     updateFilter = () => {
-        if (this.data === null) {
-            throw new Error('Data are null and cannot be filtered!');
-        }
-        this.filtered = this.data.filter(this.filterAll);
+        this.filtered = this.updateFce(this.data.filter(this.filterAll));
         return this.getFilteredData();
     }
 
@@ -151,7 +148,7 @@ export default class Filter {
      *
      * @memberOf Filter
      */
-    getFilteredData = () => this.updateFce();
+    getFilteredData = this.filtered;
     /**
      * Simple getter
      *
@@ -165,11 +162,11 @@ export default class Filter {
     /**
      * Helper function when sort is not in filter
      */
-    filterWOSort = () => this.filtered
+    filterWOSort = data => data
     /**
      * Helper function with sort;
      */
-    filterWSort = () => this.SortEngine.setData(this.filtered)
+    filterWSort = data => this.SortEngine.setData(data)
     /**
      * Getter for filter
      * @returns {FilterValue | null} return filter value
