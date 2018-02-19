@@ -12,17 +12,19 @@ import Sort from 'data-sort';
  */
 export default class Filter {
     updateFce = this.filterWOSort;
+    data = [];
+    sortEngine = null;
     /**
      * Creates an instance of Filter.
      * @param {any} data - initial data
      *
      * @memberOf Filter
      */
-    constructor(data = [], sortEngine = null) {
-        this.filtered = data;
+    constructor({ data, sortEngine, } = {}) {
         this.filters = {};
         this.SortEngine = sortEngine;
         this.Data = data;
+        this.filtered = this.Data;
     }
     /**
      * Setter for data

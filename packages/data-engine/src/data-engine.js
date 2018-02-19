@@ -26,8 +26,15 @@ class DataEngine {
      *
      * @memberOf DataEngine
      */
-    constructor(data = [], primaryKey = null, sortFunction = null) {
-        this.filterEngine = new Filter(data, new Sort(data, primaryKey, sortFunction));
+    constructor({
+        data, primaryKey, sortFunction, direction,
+    } = {}) {
+        this.filterEngine = new Filter({
+            data,
+            sortEngine: new Sort({
+                data, primaryKey, sortFunction, direction,
+            }),
+        });
     }
     /**
      * Getter for filter Engine
@@ -119,7 +126,5 @@ class DataEngine {
         return this.getData();
     }
 }
-const { regexEscape, } = FilterValue;
 
 export default DataEngine;
-export { FilterValue, Filter, Sort, regexEscape };

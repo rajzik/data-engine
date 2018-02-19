@@ -12,6 +12,10 @@
  */
 
 export default class Sort {
+    primaryKey = null;
+    direction = true;
+    data = [];
+    currentName = null;
     /**
      * Creates an instance of Sort.
      * @param {any} data - original data
@@ -21,13 +25,17 @@ export default class Sort {
      *
      * @memberOf Sort
      */
-    constructor(data = [], primaryKey = null, sortFunction = null, direction = true) {
-        this.currentName = null;
+    constructor({
+        data,
+        primaryKey,
+        sortFunction,
+        direction,
+    } = {}) {
         this.Direction = direction;
         this.sortFunc = this.defaultSort;
         this.SortFunction = sortFunction;
         this.PrimaryKey = primaryKey;
-        this.setData(data);
+        this.Data = data;
     }
     /**
      * Update data, refresh old data with new.
@@ -97,6 +105,13 @@ export default class Sort {
     }
     set PrimaryKey(key) {
         this.setPrimaryKey(key);
+    }
+    /**
+     * Getter for primary key
+     * @returns {string|null}
+     */
+    get PrimaryKey() {
+        return this.primaryKey;
     }
     /**
      * Remover primary key set to default
