@@ -7,13 +7,6 @@ import { error } from 'shared/log';
  * @return {number} retyped number
  * @memberOf FilterValue
  */
-const numberRetype = (item) => {
-    try {
-        return parseFloat(item);
-    } catch (e) {
-        error(`${item} does not have format to parse with native function!`);
-        throw e;
-    }
-};
+const numberRetype = item => parseFloat(item);
 
 export default numberRetype;

@@ -57,5 +57,20 @@ describe('FilterValue array test', () => {
         testValue.Value = val;
         expect(testValue.Value).toEqual(false);
     });
-    
+    it('Should change to boolean', () => {
+        let testValue = new FilterValue();
+        testValue.Type = 'number';
+        let val = false;
+        testValue.Value = val;
+        expect(testValue.Value).toEqual(parseFloat(val));
+        val = '4';
+        testValue.Value = val;
+        expect(testValue.Value).toEqual(4);
+        val = '';
+        testValue.Value = val;
+        expect(testValue.Value).toBeNaN();
+        val = undefined;
+        testValue.Value = val;
+        expect(testValue.Value).toBeNaN();
+    });
 });
