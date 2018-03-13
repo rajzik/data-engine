@@ -33,7 +33,22 @@ jobs:
 
       - run:
           name: Test Packages
-          command: ./scripts/circleci/test_entry_point.sh
+          command: yarn test
+      
+      - run:
+          name: Test Prod Packages
+          command: yarn test-prod
+      
+      - run:
+          name: Test Build Packages
+          command: yarn test-build
+
+      - run:
+          name: Test Build Prod Packages
+          command: yarn test-build-prod
+      #- run:
+      #    name: Test Packages
+      #    command: ./scripts/circleci/test_entry_point.sh
 
       - save_cache:
           name: Save node_modules cache
