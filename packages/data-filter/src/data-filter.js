@@ -42,6 +42,7 @@ export default class Filter {
         if (data && Array.isArray(data)) {
             this.data = data;
             this.updateFilter();
+            return;
         }
         this.data = [];
         this.filtered = [];

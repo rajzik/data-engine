@@ -26,4 +26,22 @@ describe('Data engine', () => {
         dataEngine.Data = [];
         expect(dataEngine.Data.length).toBe(0);
     });
+    it('should not be empty array', () => {
+        const dataEngine = new DataEngine();
+        dataEngine.Data = [
+            { a: 1, },
+            { a: 1, },
+            { a: 1, },
+            { a: 1, },
+            { a: 1, },
+            { a: 1, },
+            { a: 1, },
+            { a: 1, },
+            { a: 1, },
+            { a: 1, },
+            { a: 1, },
+            { a: 1, }
+        ];
+        expect(dataEngine.Data.length).not.toBe(0);
+    });
 });
