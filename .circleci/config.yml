@@ -40,6 +40,10 @@ jobs:
           command: yarn test-prod
       
       - run:
+          name: Build Artifacts
+          command: yarn build
+
+      - run:
           name: Test Build Packages
           command: yarn test-build
 
