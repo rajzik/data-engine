@@ -15,6 +15,7 @@ export default class Filter {
     static Sort = Sort;
     updateFce = this.filterWOSort;
     data = [];
+    filtered = [];
     sortEngine = null;
     /**
      * Creates an instance of Filter.
@@ -26,7 +27,7 @@ export default class Filter {
         this.filters = {};
         this.SortEngine = sortEngine;
         this.Data = data;
-        this.filtered = this.Data;
+        this.filtered = this.data;
     }
     /**
      * Setter for data
@@ -120,7 +121,7 @@ export default class Filter {
     clearFilters = () => {
         this.filters = {};
         this.filtered = this.updateFce(this.data);
-        return this.getFilteredData();
+        return this.filtered;
     }
     /**
      * Update filtered array.
@@ -130,7 +131,7 @@ export default class Filter {
      */
     updateFilter = () => {
         this.filtered = this.updateFce(this.data.filter(this.filterAll));
-        return this.getFilteredData();
+        return this.filtered;
     }
 
     /**
@@ -160,14 +161,14 @@ export default class Filter {
      * @private
      * @return {Array<any>} filtered data
      */
-    filterWOSort = data => data
+    filterWOSort = () => this.filtered
     /**
      * Helper function with sort
      * Filtering with sort
      * @private
      * @return {Array<any>} filtered and sorted array
      */
-    filterWSort = data => this.SortEngine.setData(data)
+    filterWSort = () => this.SortEngine.setData(this.filtered)
     /**
      * Getter for filter
      * @param {string} name - name of filter
