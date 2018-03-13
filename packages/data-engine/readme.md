@@ -41,7 +41,7 @@ var Filter = require('data-engine');
 ```javascript 
     const filteredData = engine.updateFilters(filter, filter2, filter3);
     const filteredData = engine.removeFilters(filter, filter2, filter3);
-    const filteredData = engine.createFilter(name, value, type);
+    const filteredData = engine.addFilter(name, value, type);
     const filteredData = engine.clearFilters();
 ```
 

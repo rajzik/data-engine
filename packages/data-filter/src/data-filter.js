@@ -27,7 +27,7 @@ export default class Filter {
         this.filters = {};
         this.SortEngine = sortEngine;
         this.Data = data;
-        this.filtered = this.data;
+        this.filtered = this.Data;
     }
     /**
      * Setter for data
@@ -36,14 +36,15 @@ export default class Filter {
      * @memberOf Filter
      */
     setData = (data) => {
-        if (Array.isArray(data)) {
+        this.Data = data;
+    }
+    set Data(data) {
+        if (data && Array.isArray(data)) {
             this.data = data;
             this.updateFilter();
         }
         this.data = [];
-    }
-    set Data(data) {
-        this.setData(data);
+        this.filtered = [];
     }
     /**
      * Setter for data
@@ -120,8 +121,8 @@ export default class Filter {
      */
     clearFilters = () => {
         this.filters = {};
-        this.filtered = this.updateFce(this.data);
-        return this.filtered;
+        this.updateFilter();
+        return this.FilteredData;
     }
     /**
      * Update filtered array.
@@ -131,7 +132,7 @@ export default class Filter {
      */
     updateFilter = () => {
         this.filtered = this.updateFce(this.data.filter(this.filterAll));
-        return this.filtered;
+        return this.FilteredData;
     }
 
     /**
@@ -151,9 +152,9 @@ export default class Filter {
      *
      * @memberOf Filter
      */
-    getFilteredData = () => this.filtered;
+    getFilteredData = () => this.FilteredData;
     get FilteredData() {
-        return this.getFilteredData();
+        return this.filtered;
     }
     /**
      * Helper function when sort is not in filter
@@ -161,14 +162,14 @@ export default class Filter {
      * @private
      * @return {Array<any>} filtered data
      */
-    filterWOSort = () => this.filtered
+    filterWOSort = data => data
     /**
      * Helper function with sort
      * Filtering with sort
      * @private
      * @return {Array<any>} filtered and sorted array
      */
-    filterWSort = () => this.SortEngine.setData(this.filtered)
+    filterWSort = data => this.SortEngine.setData(data)
     /**
      * Getter for filter
      * @param {string} name - name of filter

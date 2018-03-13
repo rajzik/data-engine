@@ -47,12 +47,13 @@ export default class Sort {
     setData = (data, shouldSort = true) => {
         if (!Array.isArray(data)) {
             this.data = [];
-            return;
+            return [];
         }
         this.data = data;
         if (shouldSort) {
             this.sortData();
         }
+        return this.data;
     }
     set Data(data) {
         this.setData(data);
@@ -247,8 +248,8 @@ export default class Sort {
      *
      * @memberOf Sort
      */
-    getData = () => this.data;
+    getData = () => this.Data;
     get Data() {
-        return this.getData();
+        return this.data;
     }
 }

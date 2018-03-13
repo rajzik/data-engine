@@ -56,7 +56,9 @@ class DataEngine {
     set Data(data) {
         this.setData(data);
     }
-    setData = data => this.FilterEngine.setData(data);
+    setData = (data) => {
+        this.filterEngine.Data = data;
+    }
     /**
      * @see data-filter
      */
@@ -68,7 +70,7 @@ class DataEngine {
     /**
      * @see data-filter
      */
-    createFilter = (name, value, type) => this.FilterEngine.createFilter(name, value, type);
+    addFilter = (name, value, type) => this.FilterEngine.addFilter(name, value, type);
     /**
      * @see data-filter
      */
@@ -97,14 +99,14 @@ class DataEngine {
      */
     sortBy = name => this.SortEngine.sortBy(name);
     /**
-     * Getter for data
+     * Getter for filtered data
      *
      * @return {array} sorted and filtered array
      * @memberOf DataEngine
      */
-    getData = () => this.FilterEngine.FilteredData;
+    getData = () => this.Data;
     get Data() {
-        return this.getData();
+        return this.FilterEngine.FilteredData;
     }
 }
 
