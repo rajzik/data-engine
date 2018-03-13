@@ -22,7 +22,6 @@ class DataEngine {
      * @param {Array} [data=null]
      * @param {string} [primaryKey=null]
      * @param {function} [sortFunction=null]
-     * @param {function} [fetchFunction=null]
      *
      * @memberOf DataEngine
      */
@@ -38,32 +37,40 @@ class DataEngine {
     }
     /**
      * Getter for filter Engine
-     * @returns {Filter} instance of our filter
+     * @returns {Filter} instance of filter
      */
     get FilterEngine() {
         return this.filterEngine;
     }
     /**
      * Getter for sort engine
-     * @returns {Sort} instance of our sort
+     * @returns {Sort} instance of sort
      */
     get SortEngine() {
         return this.filterEngine.SortEngine;
     }
     /**
      * Setter for updating data
+     * @param {Array<any>} data - original data
      */
+    set Data(data) {
+        this.setData(data);
+    }
     setData = data => this.FilterEngine.setData(data);
     /**
-     * Updating filters
+     * @see data-filter
      */
     updateFilters = (...items) => this.FilterEngine.update(...items);
     /**
-     * Removing filters
+     * @see data-filter
      */
     removeFilters = (...items) => this.FilterEngine.removeFilters(...items);
     /**
-     * Clearing all filters
+     * @see data-filter
+     */
+    createFilter = (name, value, type) => this.FilterEngine.createFilter(name, value, type);
+    /**
+     * @see data-filter
      */
     clearFilters = () => this.FilterEngine.clearFilters();
     /**
@@ -74,47 +81,21 @@ class DataEngine {
      */
     setSortFunction = func => this.SortEngine.setSortFunction(func);
     /**
-     * Setter for primary key (fallback key)
-     *
-     * @param {string} key primary key
-     * @memberOf Sort
+     * @see data-sort
      */
     setPrimaryKey = key => this.SortEngine.setPrimaryKey(key);
     /**
-     * Remover primary key set to default
-     *
-     *
-     * @memberOf Sort
+     * @see data-sort
      */
     removePrimaryKey = () => this.SortEngine.removePrimaryKey();
     /**
-     * Setup default sort function
-     *
-     *
-     * @memberOf Sort
+     * @see data-sort
      */
     setDefaultSort = () => this.SortEngine.setDefaultSort();
     /**
-     * sort by name, sets new name and check if we need to only reverse
-     *
-     * @param {string} name key for sort
-     * @memberOf Sort
+     * @see data-sort
      */
     sortBy = name => this.SortEngine.sortBy(name);
-    /**
-     * Well just sort function. when we need resort.
-     *
-     * @return {Array} sorted data
-     * @memberOf Sort
-     */
-    sortData = () => this.SortEngine.sortData();
-    /**
-     * well just reverse sorted array
-     *
-     * @return {Array} reversed data
-     * @memberOf Sort
-     */
-    reverseData = () => this.SortEngine.reverseData();
     /**
      * Getter for data
      *

@@ -35,7 +35,7 @@ class FilterValue {
     }
     /**
      * Preparing item for right validation.
-     *
+     * @private
      * @param {any} item - filter value!
      *
      * @return {Array/any} right element.
@@ -100,6 +100,7 @@ class FilterValue {
     }
     /**
      * getter for internal type
+     * @private
      * @returns {string} type
      */
     get InternalType() {
@@ -107,7 +108,6 @@ class FilterValue {
     }
     /**
      * Remove static Type
-     *
      *
      * @memberOf FilterValue
      */
@@ -156,7 +156,7 @@ class FilterValue {
     }
     /**
      * Applying filter to item which will return true/false. True when it should be ignored.
-     *
+     * @private
      * @param {any} toCompare - item which will be compared.
      * @memberOf FilterValue
      */
@@ -165,7 +165,7 @@ class FilterValue {
      * Checking validity of supported types
      * valid types are
      * null, string, number, regexp, function, array of items mentioned before!
-     *
+     * @private
      * @param {any} item
      * @return {string|null} return type or null
      * @memberOf FilterValue

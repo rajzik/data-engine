@@ -11,6 +11,8 @@ import Sort from 'data-sort';
  * @class Filter
  */
 export default class Filter {
+    static FilterValue = FilterValue;
+    static Sort = Sort;
     updateFce = this.filterWOSort;
     data = [];
     sortEngine = null;
@@ -29,7 +31,7 @@ export default class Filter {
     /**
      * Setter for data
      *
-     * @param {Array} data new data
+     * @param {Array} data - original data
      * @memberOf Filter
      */
     setData = (data) => {
@@ -37,20 +39,14 @@ export default class Filter {
             this.data = data;
             this.updateFilter();
         }
+        this.data = [];
     }
-    /**
-     * Setter for data
-     *
-     * @param {Array} data new data
-     * @memberOf Filter
-     */
     set Data(data) {
         this.setData(data);
     }
     /**
      * Setter for data
-     *
-     * @param {Array} data new data
+     * @return {Array<any>} original data
      * @memberOf Filter
      */
     get Data() {
@@ -58,6 +54,7 @@ export default class Filter {
     }
     /**
      * Helper function for creating new filterValue
+     * @private
      * @param {string} name - name of collumn
      * @param {any} value - value of filter
      * @param {string} type - static type for value
@@ -69,13 +66,14 @@ export default class Filter {
      * @param {string} name - name of collumn
      * @param {any} value - value of filter
      * @param {string} type - static type for value
+     * @return {Array<any>} filtered array
      */
     addFilter = (name, value, type) => this.update(this.createFilter(name, value, type))
     /**
      * Add or modify filter value
      *
      *
-     * @param {Array} items - array of filter items
+     * @param {Array<FilterValue>} items - array of filter items
      * @throws {TypeError} when item isn't instance of FilterValue
      * @return {Array} new filtered array
      * @memberOf Filter
@@ -95,9 +93,10 @@ export default class Filter {
     /**
      * Remove one or as many filters as you add value
      * only updating when at least one filter was removed
-     * @param {object} item - filter item
      *
-     * @return {Array} new filtered array
+     * @param {Array<string | FilterValue>} item - filter item
+     *
+     * @return {Array<any>} new filtered array
      * @memberOf Filter
      */
     removeFilters = (...names) => {
@@ -112,9 +111,10 @@ export default class Filter {
         return returnFunc();
     }
     /**
-     * Clears all filters
+     * Clears all filters,
+     * it's possible that sort is still active so we need to filter anyway
      *
-     * @return {Array} new filtered array
+     * @return {Array<any>} new filtered array
      * @memberOf Filter
      */
     clearFilters = () => {
@@ -135,9 +135,9 @@ export default class Filter {
 
     /**
      * Filter line by all criteria.
-     *
+     * Helper function for filtering.
+     * @private
      * @param {object} line - line from original data.
-     *
      * @return {bool}
      * @memberOf Filter
      */
@@ -150,27 +150,27 @@ export default class Filter {
      *
      * @memberOf Filter
      */
-    getFilteredData = this.filtered;
-    /**
-     * Simple getter
-     *
-     * @returns {array} filtered data
-     *
-     * @memberOf Filter
-     */
+    getFilteredData = () => this.filtered;
     get FilteredData() {
         return this.getFilteredData();
     }
     /**
      * Helper function when sort is not in filter
+     * filtering without sort
+     * @private
+     * @return {Array<any>} filtered data
      */
     filterWOSort = data => data
     /**
-     * Helper function with sort;
+     * Helper function with sort
+     * Filtering with sort
+     * @private
+     * @return {Array<any>} filtered and sorted array
      */
     filterWSort = data => this.SortEngine.setData(data)
     /**
      * Getter for filter
+     * @param {string} name - name of filter
      * @returns {FilterValue | null} return filter value
      */
     getFilter = (name) => {

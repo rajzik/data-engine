@@ -46,6 +46,7 @@ export default class Sort {
      */
     setData = (data, shouldSort = true) => {
         if (!Array.isArray(data)) {
+            this.data = [];
             return;
         }
         this.data = data;
@@ -76,7 +77,8 @@ export default class Sort {
      * @param {boolean} direction of sort
      */
     set Direction(direction) {
-        this.direction = !!direction;
+        if (typeof direction === 'boolean') this.direction = direction;
+        else this.direction = true;
     }
     /**
      * Getter for direction
@@ -120,7 +122,7 @@ export default class Sort {
      * @memberOf Sort
      */
     removePrimaryKey = () => {
-        this.primaryKey = '';
+        this.primaryKey = null;
         this.setOwnSortFunction();
     }
     /**
@@ -177,14 +179,14 @@ export default class Sort {
     };
     /**
      * Setting right function for sort,
-     *
+     * @private
      */
     setOwnSortFunction = () => {
         const { isCustomFunction, primaryKey, currentName, } = this;
         if (isCustomFunction) {
             return;
         }
-        if (primaryKey && primaryKey !== currentName) {
+        if (primaryKey !== null && primaryKey !== currentName) {
             this.sortFunc = this.defaultSortWithKey;
         } else {
             this.sortFunc = this.defaultSort;
@@ -193,7 +195,7 @@ export default class Sort {
     /**
      * default sort with key
      * Default sorting function when user won't add own function.
-     *
+     * @private
      * @param {any} a - first item
      * @param {any} b - second item
      * @return {number} position of elements

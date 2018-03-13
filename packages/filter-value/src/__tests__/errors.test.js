@@ -1,4 +1,3 @@
-/* eslint-disable */
 
 describe('FilterValue', () => {
     let FilterValue;
@@ -8,27 +7,27 @@ describe('FilterValue', () => {
     });
 
     it('Should throw type error', () => {
-        let testValue = new FilterValue('test');
+        const testValue = new FilterValue('test');
         expect(() => {
             testValue.Value = [[]];
         }).toThrow();
     });
     it('should throw on type error', () => {
-        let testValue = new FilterValue();        
-        expect(() => { 
+        const testValue = new FilterValue();
+        expect(() => {
             testValue.Type = 'Not work';
         }).toThrow();
     });
     it('should throw on type error', () => {
-        let testValue = new FilterValue();        
-        expect(() => { 
-            testValue.Value = {a:{b:{}}};
+        const testValue = new FilterValue();
+        expect(() => {
+            testValue.Value = { a: { b: {}, }, };
         }).toThrow();
     });
     it('should throw on type error', () => {
-        let testValue = new FilterValue();        
+        const testValue = new FilterValue();
         testValue.Type = 'date';
-        expect(() => { 
+        expect(() => {
             testValue.Value = ['Hello'];
         }).toThrow();
     });

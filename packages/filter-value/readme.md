@@ -1,58 +1,131 @@
-# FILTER-VALUE 
+# FILTER VALUE
 
-Creating new filter value
+Filter value is engine for filtering data by it's value
+
+# Installation
+
+```
+npm install --save filter-value
+```
+
+# Example Usage 
 
 ```javascript
-const filter = new FilterValue('name');
-const filter2 = new FilterValue('name', 'value');
-const filter3 = new FilterValue('name', 'value', 'type');
+import FilterValue from 'filter-value';
+var FilterValue = require('filter-value');
 ```
 
-Updating filter value 
+
+## Example data
 ```javascript
-    filter.Name = 'New Name';
-    filter.Value = /New value/i;
-    filter.Type = 'regex';
+const a = [
+    {
+        'column1': 1,
+        'column2': false,
+        'column3': 'test',
+    }, {
+        'column1': 2,
+        'column2': true,
+        'column3': 'test2',
+    }
+]
 ```
 
-Removing type 
+## Constructor
+
+Creating new Filter value instance
 ```javascript
-    filter.removeType();
+    const filterValue = new FilterValue();
+    const filterValue2 = new FilterValue(name);
+    const filterValue3 = new FilterValue(name, value);
+    const filterValue4 = new FilterValue(name, value, staticType);
 ```
 
-Getting values
-``` javascript
-    const name = filter.Name;
-    const value = filter.Value;
+## Name
+
+```javascript
+    filterValue.Name = 'new Name';
+    const name = filterValue.Name;
+```
+
+## Value 
+
+Valid values: 
+- String
+- Number
+- Date
+- Function
+- Boolean
+- Regexp
+- Null
+- Array
+
+
+```javascript
+    filterValue.Value = 'new value';
+    const value = filterValue.Value;
 ```
 
 
-## Possible value types
+### Range filter
 
-* `boolean`
-* `function`
-* `array`
-* `regexp`
-* `date`
-* `string`
-* `number`
-* `range` *
+Valid value for range
+- Number
+- String
+- Date*
 
-> * Note: range can only contains `string`, `number` or `date`
+> Note: *Date will try to create date from given item in array if item isn't instance of Date
 
-## Static type values
+```javascript
+    filterValue.Value = {
+        from: new Date(),
+        to: new Date()
+    }
+```
 
-* `number`
-* `string`
-* `boolean`
+### Array filter 
+Array filter can be variety of types
 
-When static type is set, it will try to parse value as this type!
+Valid values for array
+- String
+- Number
+- Date
+- Function
+- Boolean
+- Regexp
+- Null
 
-## WARNING
+#### Limitations
+Only one dimensional array can be used
 
-> Note: Filter value using prototype changes which are dangerous.
-> 
-> Note: When you using regexp please use `FilterValue.regexEscape('Some regular expression')`
+```javascript
+    filterValue.Value = [
+        'yes',
+        false,
+        null,
+        new Date()
+    ]
+```
 
+## Type 
 
+When type is set value will automatically retype to chosen type.
+It's possible to get original value, example is shown below.
 
+Valid types
+- Boolean
+- Date*
+- Number
+- Regexp**
+- String
+
+> *It's used native function `new Date(arg)`
+>
+> **Using native function `new RegExp()` with escaping characters
+
+```javascript
+    filterValue.Type = 'string';
+    filterValue.removeType();
+    const originalValue = filterValue.Original;
+    const type = filterValue.Type;
+```

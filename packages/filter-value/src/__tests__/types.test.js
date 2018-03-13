@@ -1,4 +1,3 @@
-/* eslint-disable */
 
 describe('FilterValue array test', () => {
     let FilterValue;
@@ -7,15 +6,15 @@ describe('FilterValue array test', () => {
         FilterValue = require('filter-value');
     });
     it('Should change to time', () => {
-        let testValue = new FilterValue();        
+        const testValue = new FilterValue();
         testValue.Type = 'date';
-        let dateString = '2002-01-01';
+        const dateString = '2002-01-01';
         const date = new Date(dateString);
         testValue.Value = dateString;
         expect(testValue.Value.getTime()).toBe(date.getTime());
     });
     it('Should change to string', () => {
-        let testValue = new FilterValue();
+        const testValue = new FilterValue();
         testValue.Type = 'string';
         let val = false;
         testValue.Value = val;
@@ -28,11 +27,11 @@ describe('FilterValue array test', () => {
         expect(testValue.Value).toBe(val.toString());
         val = undefined;
         testValue.Value = val;
-        expect(testValue.Value).toBe(('' + val));
+        expect(testValue.Value).toBe((`${val}`));
     });
 
     it('Should change to Regexp', () => {
-        let testValue = new FilterValue();
+        const testValue = new FilterValue();
         testValue.Type = 'regexp';
         let val = false;
         testValue.Value = val;
@@ -42,7 +41,7 @@ describe('FilterValue array test', () => {
         expect(testValue.Value).toEqual(new RegExp(val, 'i'));
     });
     it('Should change to boolean', () => {
-        let testValue = new FilterValue();
+        const testValue = new FilterValue();
         testValue.Type = 'boolean';
         let val = false;
         testValue.Value = val;
@@ -58,7 +57,7 @@ describe('FilterValue array test', () => {
         expect(testValue.Value).toEqual(false);
     });
     it('Should change to boolean', () => {
-        let testValue = new FilterValue();
+        const testValue = new FilterValue();
         testValue.Type = 'number';
         let val = false;
         testValue.Value = val;

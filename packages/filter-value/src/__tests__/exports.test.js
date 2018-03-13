@@ -1,14 +1,12 @@
-/* eslint-disable */
 
 describe('regexpEscape', () => {
-    let regexpEscape;
+    let rEscape;
     beforeEach(() => {
         jest.resetModules();
-        regexpEscape = require('filter-value').regexpEscape;
+        rEscape = require('filter-value').regexpEscape;
     });
-    
+
     it('Should export regexpEscape', () => {
-        expect(regexpEscape).not.toBeUndefined();
+        expect(rEscape).not.toBeUndefined();
     });
-    
 });
