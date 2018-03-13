@@ -27,7 +27,7 @@ export default class Filter {
         this.filters = {};
         this.SortEngine = sortEngine;
         this.Data = data;
-        this.filtered = this.Data;
+        this.filtered = this.getData();
     }
     /**
      * Setter for data
@@ -51,8 +51,9 @@ export default class Filter {
      * @return {Array<any>} original data
      * @memberOf Filter
      */
+    getData = () => this.data
     get Data() {
-        return this.data;
+        return this.getData();
     }
     /**
      * Helper function for creating new filterValue
@@ -152,9 +153,9 @@ export default class Filter {
      *
      * @memberOf Filter
      */
-    getFilteredData = () => this.FilteredData;
+    getFilteredData = () => this.filtered;
     get FilteredData() {
-        return this.filtered;
+        return this.getFilteredData();
     }
     /**
      * Helper function when sort is not in filter

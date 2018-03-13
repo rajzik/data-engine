@@ -8,7 +8,9 @@ describe('Filter', () => {
         const filter = new Filter();
         expect(filter).toBeInstanceOf(Filter);
         expect(filter.SortEngine).toBe(null);
+        console.log(filter.Data);
         expect(filter.Data.length).toBe(0);
+        console.log(filter.FilteredData);
         expect(filter.FilteredData.length).toBe(0);
     });
 
