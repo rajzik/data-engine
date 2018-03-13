@@ -7,7 +7,7 @@ jobs:
 
     environment:
       TZ: /usr/share/zoneinfo/America/Los_Angeles
-      TRAVIS_REPO_SLUG: facebook/react
+      TRAVIS_REPO_SLUG: rajzik/data-engine
 
     parallelism: 4
 
@@ -31,9 +31,9 @@ jobs:
           name: Install Packages
           command: yarn install
 
-      # - run:
-      #     name: Test Packages
-      #     command: ./scripts/circleci/test_entry_point.sh
+      - run:
+          name: Test Packages
+          command: ./scripts/circleci/test_entry_point.sh
 
       - save_cache:
           name: Save node_modules cache
