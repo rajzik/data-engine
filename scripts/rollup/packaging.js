@@ -67,8 +67,8 @@ async function prepareNpmPackage(name) {
             `build/node_modules/${name}/package.json`
         ),
         asyncCopyTo(
-            `packages/${name}/README.md`,
-            `build/node_modules/${name}/README.md`
+            `packages/${name}/readme.md`,
+            `build/node_modules/${name}/readme.md`
         ),
         asyncCopyTo(`packages/${name}/npm`, `build/node_modules/${name}`)
     ]);
