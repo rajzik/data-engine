@@ -184,9 +184,14 @@ class FilterValue {
         } else if (item instanceof Date) {
             return 'date';
         } else if (
-            item.from &&
-            item.to &&
-            checkRangeAbleTypes(item.from) === checkRangeAbleTypes(item.to)
+            (
+                item.from ||
+                item.to
+            ) &&
+            (
+                checkRangeAbleTypes(item.from) ||
+                checkRangeAbleTypes(item.to)
+            )
         ) {
             return 'range';
         }
