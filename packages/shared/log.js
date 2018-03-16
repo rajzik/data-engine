@@ -19,9 +19,8 @@ let log = noop;
 let warn = noop;
 let error = noop;
 
-if (!__TEST__) {
+if (__DEV__) {
     error = errorFunction;
-} else if (__DEV__) {
     log = logFunction;
     warn = warnFunction;
 }
