@@ -5,7 +5,7 @@
       "bundleType": "UMD_DEV",
       "packageName": "data-engine",
       "size": 34143,
-      "gzip": 6459
+      "gzip": 6458
     },
     {
       "filename": "data-engine.production.min.js",
@@ -19,35 +19,35 @@
       "bundleType": "NODE_DEV",
       "packageName": "data-engine",
       "size": 4803,
-      "gzip": 1466
+      "gzip": 1465
     },
     {
       "filename": "data-engine.production.min.js",
       "bundleType": "NODE_PROD",
       "packageName": "data-engine",
       "size": 2049,
-      "gzip": 849
+      "gzip": 848
     },
     {
       "filename": "data-filter.development.js",
       "bundleType": "UMD_DEV",
       "packageName": "data-filter",
       "size": 29767,
-      "gzip": 5898
+      "gzip": 5897
     },
     {
       "filename": "data-filter.production.min.js",
       "bundleType": "UMD_PROD",
       "packageName": "data-filter",
       "size": 11356,
-      "gzip": 3390
+      "gzip": 3389
     },
     {
       "filename": "data-filter.development.js",
       "bundleType": "NODE_DEV",
       "packageName": "data-filter",
       "size": 8494,
-      "gzip": 2183
+      "gzip": 2182
     },
     {
       "filename": "data-filter.production.min.js",
@@ -61,7 +61,7 @@
       "bundleType": "UMD_DEV",
       "packageName": "data-sort",
       "size": 9177,
-      "gzip": 2131
+      "gzip": 2130
     },
     {
       "filename": "data-sort.production.min.js",
@@ -82,21 +82,21 @@
       "bundleType": "NODE_PROD",
       "packageName": "data-sort",
       "size": 2854,
-      "gzip": 1079
+      "gzip": 1078
     },
     {
       "filename": "filter-value.development.js",
       "bundleType": "UMD_DEV",
       "packageName": "filter-value",
       "size": 13003,
-      "gzip": 3368
+      "gzip": 3367
     },
     {
       "filename": "filter-value.production.min.js",
       "bundleType": "UMD_PROD",
       "packageName": "filter-value",
       "size": 4253,
-      "gzip": 1688
+      "gzip": 1687
     },
     {
       "filename": "filter-value.development.js",
@@ -110,7 +110,7 @@
       "bundleType": "NODE_PROD",
       "packageName": "filter-value",
       "size": 4086,
-      "gzip": 1638
+      "gzip": 1637
     }
   ]
 }
