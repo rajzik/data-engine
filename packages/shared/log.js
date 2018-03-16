@@ -17,9 +17,11 @@ function noop() {};
 
 let log = noop;
 let warn = noop;
-let error = errorFunction;
+let error = noop;
 
-if (__DEV__) {
+if (!__TEST__) {
+    error = errorFunction;
+} else if (__DEV__) {
     log = logFunction;
     warn = warnFunction;
 }
