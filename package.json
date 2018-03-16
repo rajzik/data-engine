@@ -6,10 +6,10 @@
   "scripts": {
     "build": "npm run version-check && node ./scripts/rollup/build.js",
     "version-check": "node ./scripts/tasks/version-check.js",
-    "test": "cross-env NODE_ENV=development IS_TEST=test jest --config ./scripts/jest/config.source.js",
-    "test-prod": "cross-env NODE_ENV=production IS_TEST=test jest --config ./scripts/jest/config.source.js",
-    "test-build": "cross-env NODE_ENV=development IS_TEST=test jest --config ./scripts/jest/config.build.js",
-    "test-build-prod": "cross-env NODE_ENV=production IS_TEST=test jest --config ./scripts/jest/config.build.js",
+    "test": "cross-env NODE_ENV=development jest --config ./scripts/jest/config.source.js",
+    "test-prod": "cross-env NODE_ENV=production jest --config ./scripts/jest/config.source.js",
+    "test-build": "cross-env NODE_ENV=development jest --config ./scripts/jest/config.build.js",
+    "test-build-prod": "cross-env NODE_ENV=production jest --config ./scripts/jest/config.build.js",
     "lint": "eslint --ext .js packages"
   },
   "workspaces": [
