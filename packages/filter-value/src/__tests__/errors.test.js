@@ -26,6 +26,13 @@ describe('FilterValue', () => {
     });
     it('should throw on type error', () => {
         const testValue = new FilterValue();
+        expect(() => {
+            testValue.Value = { from: null, to: null, };
+        }).toThrow();
+    });
+
+    it('should throw on type error', () => {
+        const testValue = new FilterValue();
         testValue.Type = 'date';
         expect(() => {
             testValue.Value = ['Hello'];

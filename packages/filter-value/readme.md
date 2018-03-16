@@ -68,6 +68,7 @@ Valid values:
 
 
 ### Range filter
+Range filter can be used with one value, which will filter smaller or bigger values. 
 
 Valid value for range
 - Number
@@ -80,8 +81,21 @@ Valid value for range
     filterValue.Value = {
         from: new Date(),
         to: new Date()
-    }
+    };
+
+    filterValue.Value = {
+        from: new Date(),
+        to: null
+    };
+
+    filterValue.Value = {
+        from: null,
+        to: new Date()
+    };
 ```
+
+
+
 
 ### Array filter 
 Array filter can be variety of types

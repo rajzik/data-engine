@@ -1,5 +1,7 @@
 function isBetween(fromRange, toRange, toCompare) {
-    return fromRange <= toCompare && toRange >= toCompare;
+    if (fromRange && toRange) return fromRange <= toCompare && toRange >= toCompare;
+    if (fromRange) return fromRange <= toCompare;
+    return toRange >= toCompare;
 }
 
 function isTimeBetween(fromRange, toRange, toCompare) {
@@ -7,8 +9,12 @@ function isTimeBetween(fromRange, toRange, toCompare) {
     if (!toCompare.getTime) {
         compareDate = new Date(toCompare);
     }
-    return fromRange.getTime() <= compareDate.getTime() &&
-        toRange.getTime() >= compareDate.getTime();
+    if (fromRange && toRange) {
+        return fromRange.getTime() <= compareDate.getTime() &&
+           toRange.getTime() >= compareDate.getTime();
+    }
+    if (fromRange) return fromRange.getTime() <= compareDate.getTime();
+    return toRange.getTime() >= compareDate.getTime();
 }
 /**
  * Compares range
@@ -17,7 +23,8 @@ function isTimeBetween(fromRange, toRange, toCompare) {
  * @memberOf FilterValue
  */
 const rangeCompare = (item) => {
-    if (typeof item.from !== 'object') return toCompare => isBetween(item.from, item.to, toCompare);
+    const type = item.from ? typeof item.from : typeof item.to;
+    if (type !== 'object') return toCompare => isBetween(item.from, item.to, toCompare);
     return toCompare => isTimeBetween(item.from, item.to, toCompare);
 };
 

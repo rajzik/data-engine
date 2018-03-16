@@ -10,6 +10,29 @@ describe('FilterValue array test', () => {
         const a = new FilterValue('test', item);
         expect(a.compare(20)).toBe(true);
     });
+
+    it('Range should return true', () => {
+        const item = { from: 20, to: null, };
+
+        const a = new FilterValue('test', item);
+        expect(a.compare(20)).toBe(true);
+    });
+
+    it('Range should return true', () => {
+        const item = { from: null, to: 20, };
+        const a = new FilterValue('test', item);
+        expect(a.compare(20)).toBe(true);
+    });
+    it('Range should return true', () => {
+        const item = { from: null, to: 20, };
+        const a = new FilterValue('test', item);
+        expect(a.compare(21)).toBe(false);
+    });
+    it('Range should return true', () => {
+        const item = { from: 20, to: null, };
+        const a = new FilterValue('test', item);
+        expect(a.compare(19)).toBe(false);
+    });
     it('Range should return true', () => {
         const item = { from: 20, to: 30, };
         const a = new FilterValue('test', item);
