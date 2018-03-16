@@ -4,15 +4,15 @@
       "filename": "data-engine.development.js",
       "bundleType": "UMD_DEV",
       "packageName": "data-engine",
-      "size": 34143,
-      "gzip": 6458
+      "size": 34119,
+      "gzip": 6445
     },
     {
       "filename": "data-engine.production.min.js",
       "bundleType": "UMD_PROD",
       "packageName": "data-engine",
-      "size": 13085,
-      "gzip": 3614
+      "size": 12812,
+      "gzip": 3544
     },
     {
       "filename": "data-engine.development.js",
@@ -26,21 +26,21 @@
       "bundleType": "NODE_PROD",
       "packageName": "data-engine",
       "size": 2049,
-      "gzip": 848
+      "gzip": 847
     },
     {
       "filename": "data-filter.development.js",
       "bundleType": "UMD_DEV",
       "packageName": "data-filter",
-      "size": 29767,
-      "gzip": 5897
+      "size": 29743,
+      "gzip": 5884
     },
     {
       "filename": "data-filter.production.min.js",
       "bundleType": "UMD_PROD",
       "packageName": "data-filter",
-      "size": 11356,
-      "gzip": 3389
+      "size": 11083,
+      "gzip": 3293
     },
     {
       "filename": "data-filter.development.js",
@@ -88,29 +88,29 @@
       "filename": "filter-value.development.js",
       "bundleType": "UMD_DEV",
       "packageName": "filter-value",
-      "size": 13003,
-      "gzip": 3367
+      "size": 12979,
+      "gzip": 3354
     },
     {
       "filename": "filter-value.production.min.js",
       "bundleType": "UMD_PROD",
       "packageName": "filter-value",
-      "size": 4253,
-      "gzip": 1687
+      "size": 3980,
+      "gzip": 1585
     },
     {
       "filename": "filter-value.development.js",
       "bundleType": "NODE_DEV",
       "packageName": "filter-value",
-      "size": 12837,
-      "gzip": 3331
+      "size": 12813,
+      "gzip": 3319
     },
     {
       "filename": "filter-value.production.min.js",
       "bundleType": "NODE_PROD",
       "packageName": "filter-value",
-      "size": 4086,
-      "gzip": 1637
+      "size": 3817,
+      "gzip": 1532
     }
   ]
 }
