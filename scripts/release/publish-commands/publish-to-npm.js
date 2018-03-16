@@ -42,8 +42,8 @@ const push = async ({
                 if (remoteVersion !== packageVersion) {
                     throw Error(chalk`Published version {yellow.bold ${packageVersion}} for ` +
               chalk`{bold ${project}} but NPM shows {yellow.bold ${
-                  remoteVersion
-              }}`);
+                            remoteVersion
+                        }}`);
                 }
 
                 // If we've just published a stable release,
